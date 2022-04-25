@@ -36,7 +36,7 @@ The project is an online bookstore. The server will store information for books 
 - View cart items (and update quantities for each book), final price and finish order;
 - Payment by credit card number;
 
-Screen mockups are available in this repository and can be found in [mockup](/mockup) folder.
+Screen mockups are available in this repository and can be found in [mockup](/mockup) folder. They were made using figma ([direct link to the project](https://www.figma.com/team_invite/redeem/OtrAGOx4hGXPKdNo4IbMe0)).
 
 ### Navigation diagram
 
