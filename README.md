@@ -50,6 +50,10 @@ Screen mockups are available in this repository and can be found in [mockup](/mo
 
 ## 6. Build procedures
 
+First of all, install all dependencies: `npm install`
+
+Start localhost server: `npm start`
+
 ## 7. Problems
 
 ## 8. Comments
