@@ -24,7 +24,7 @@ Bookstore made for Web Development classes at Universidade de Sao Paulo.
 
 ## 2. Project description
 
-The project is an online bookstore. The server will store information for books and clients. Book information contains id, title, author, description, photo, category and quantity in stock/sold. Customer information contains id, name, address, email, password, phone number and a flag informing if the user is an admin.
+The project is an online bookstore. The server will store information for books and clients. Book information contains id, title, author, description, photo, category, price, quantity in stock/sold and a path to its cover image. Customer information contains id, name, address, email, password, phone number and a flag informing if the user is an admin.
 
 ### System functionalities
 

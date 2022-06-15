@@ -41,7 +41,7 @@ header {
 
 nav {
   background-color: #aec6d7;
-  height: 40px;
+  height: 90%;
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -130,6 +130,39 @@ div.desc {
   text-align: center;
 }
 
+.book-info {
+  width: 100%;
+  height: auto;
+}
+.book-info h2 {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;  
+  text-transform: uppercase;
+}
+.book-info h3 {
+  /* margin: 0;
+  line-height: 0px; */
+  color: #3E3E3E;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+}
+.book-cover {
+  max-width: 10%;
+}
+.book-inner {
+  width: 89%;
+  padding: 1px;
+  float: right;
+}
+
 .center {
   align-items: center;
   display: block;
@@ -189,6 +222,9 @@ form .txt_field{
 }
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label{
+  top: -5px;
+  color: #2691d9;
+}.txt_field input:disabled ~ label{
   top: -5px;
   color: #2691d9;
 }

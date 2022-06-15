@@ -1,17 +1,15 @@
 import BookCard from "./BookCard"
 
-const Books = ({title}) => {
+const Books = ({title, books}) => {
   return (
     <div className="center">
       <h1>{title}</h1>
       <div className="full-center">
-      <BookCard/>
-      <BookCard/>
-      <BookCard/>
-      <BookCard/>
-      <BookCard/>
-      <BookCard/>
-      <BookCard/>
+      {
+        books.map((book) => (
+          <BookCard key={book.id} book={book}/>
+        ))
+      }
       </div>
     </div>
   )

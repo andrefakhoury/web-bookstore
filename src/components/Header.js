@@ -1,11 +1,10 @@
-import cart from "../img/cart.png"
-import logo from "../img/logo.png"
-
 const Header = () => {
+  const images = require.context('../../public/images', true);
+
   return (
     <header>
       <div className="header">
-        <img className="logo" src={logo}/>
+        <img className="logo" alt="Logo" src={images("./logo.png")}/>
         <span className="title">Bookstore</span>
       </div>
 
@@ -16,7 +15,7 @@ const Header = () => {
         <a href="">fantasy & sci-fi</a>
         <a href="">humor</a>
         <a href="">romance</a>
-        <img className="cart" src={cart}/>
+        <img className="cart" alt="Cart Icon" src={images("./cart.png")}/>
       </nav>
     </header>
   )
