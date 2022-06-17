@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const Footer = () => {
   return (
     <>
@@ -5,9 +7,9 @@ const Footer = () => {
       <footer className="footer">
         <span>Quick links:</span>
         <div className="quick-links">
-          <a href="">home</a>&nbsp;|&nbsp; 
-          <a href="">cart</a>&nbsp;|&nbsp;
-          <a href="">user profile</a>
+          <Link to="/">home</Link>&nbsp;|&nbsp; 
+          <Link to="/cart">cart</Link>&nbsp;|&nbsp;
+          <Link to="/user">user profile</Link>
         </div>
       </footer>
     </>

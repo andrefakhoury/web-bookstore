@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import { verifyPassword, verifyEmail } from "../utils"
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { verifyPassword, verifyEmail, verifyEqual, fetchUser } from "../utils"
 import FormField from "./FormField"
 
-const UserProfile = ({user}) => {
+const UserProfile = ({user, onUpdate}) => {
+  let navigate = useNavigate();
   const [userName, setUserName] = useState(user.userName);
   const [address, setAddress] = useState(user.address);
   const [email, setEmail] = useState(user.email);
   const [phoneNumber, setPhoneNumber] = useState(user.phone);
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
+  const [confirmNewPassword, setConfirmNewPassword] = useState();
+
+  useEffect(() => {
+    if (!user.id)
+      navigate({pathname: "/"}, {replace: true});
+  }, [user, navigate])
 
   const onSubmit = (e) => {
     e.preventDefault();
+    
+    // Verifies fields and update
+    try {
+      verifyPassword(oldPassword, "Please verify your old password before updating your information.");
+      verifyEmail(email, "Please provide a valid email address.");
+      verifyEqual(oldPassword, user.password, "Invalid password given.");
 
-    if (!verifyPassword(oldPassword)) {
-      alert("Please verify your password before updating your information.")
-      return;
+      let password = oldPassword;
+
+      // Check new password in case it wants to be changed
+      if (newPassword) {
+        verifyPassword(newPassword, "Invalid new password");
+        verifyEqual(newPassword, confirmNewPassword, "New passwords do not match.");
+        password = newPassword;
+      }
+
+      const updatedUser = {
+        userName: userName,
+        address: address,
+        password: password,
+        phone: phoneNumber
+      };
+
+      onUpdate(user.id, updatedUser);
+      navigate("/");
+    } catch(e) {
+      alert(e);
     }
-
-    if (!verifyEmail(email)) {
-      alert("Please provide a valid email address.")
-      return;
-    }
-
-    if (oldPassword !== user.password) {
-      alert("Invalid password... Try again later.");
-      return;
-    }
-
-    console.log(`Updated user information of user ${userName}`);
-    // ... update here ...
   }
 
   return (
@@ -38,16 +56,11 @@ const UserProfile = ({user}) => {
       <form onSubmit={onSubmit}>
         <FormField label="Name" value={userName} isRequired={true} setText={setUserName}/>
         <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
-        <FormField label="Email" value={email} isDisabled={true} isRequired={true} setText={setEmail} verifyField={verifyEmail}/>
+        <FormField label="Email" value={email} isDisabled={true} isRequired={true} setText={setEmail}/>
         <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>
-        <FormField
-          label="Old password" type="password" isRequired={true}
-          setText={setOldPassword} verifyField={verifyPassword}
-        />
-        <FormField
-          label="New password" type="password"
-          setText={setNewPassword} verifyField={verifyPassword}
-        />
+        <FormField label="Old password" type="password" isRequired={true} setText={setOldPassword}/>
+        <FormField label="New password" type="password" setText={setNewPassword}/>
+        <FormField label="Confirm new password" type="password" setText={setConfirmNewPassword}/>
         <input type="submit" value="Update information"/>
       </form>
     </div>

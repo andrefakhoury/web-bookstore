@@ -24,6 +24,10 @@ header {
   text-align: center;
 }
 
+.header a {
+  text-decoration: none;
+}
+
 .logo {
   width: 80px;
   vertical-align:middle;
@@ -47,7 +51,7 @@ nav {
   padding-bottom: 10px;
 }
 
-nav a {
+.header-link {
   padding: 14px 16px;
   color: rgba(0,0,0,1);
   font-family: Kadwa;
@@ -94,7 +98,14 @@ nav a:hover, .footer a:hover{
 .cart {
   float: right;
   width:40px;
-  padding-right: 20px;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.profile {
+  float: right;
+  width: 40px;
+  margin-right: 20px;
   vertical-align: middle;
 }
 
@@ -130,10 +141,16 @@ div.desc {
   text-align: center;
 }
 
+#related-books {
+  padding: 1%;
+}
+
 .book-info {
   width: 100%;
+  padding: 5%;
   height: auto;
 }
+
 .book-info h2 {
   margin: 0;
   font-family: 'Inter';
@@ -155,10 +172,10 @@ div.desc {
   text-transform: uppercase;
 }
 .book-cover {
-  max-width: 10%;
+  max-width: 20%;
 }
 .book-inner {
-  width: 89%;
+  width: 77%;
   padding: 1px;
   float: right;
 }
@@ -168,7 +185,7 @@ div.desc {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 80%;
   font-family: Open Sans;
 }
 

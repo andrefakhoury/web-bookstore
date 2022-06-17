@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const FormField = ({label, value, type, isDisabled, isRequired, setText, verifyField}) => {
-  setText(value);
+const FormField = ({label, value, type, isDisabled, isRequired, setText}) => {
   return (
     <div className="txt_field">
       <input
