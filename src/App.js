@@ -5,12 +5,12 @@ import Books from "./components/Books";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import UserProfile from "./components/UserProfile";
-import { fetchBooks, fetchUser } from './utils';
+import { fetchUser } from './utils';
 import Cart from './components/Cart';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({});
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(new Map());
 
   // Set logged user information
   useEffect(() => {
@@ -24,7 +24,8 @@ function App() {
   // Get cart items from local storage on startup
   useEffect(() => {
     const data = window.localStorage.getItem("LOCAL_CART_ITEMS");
-    setCartItems(JSON.parse(data));
+    let dataInfo = JSON.parse(data) ?? new Map();
+    setCartItems(dataInfo);
   }, []);
 
   const updateProfile = async (id, newUser) => {
@@ -51,7 +52,7 @@ function App() {
     cartItems[bookId] = oldAmmount + qtt;
     setCartItems(cartItems);
 
-  // Save cart items from local storage
+    // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
   
@@ -66,7 +67,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
-            {/* If logged in, goest o user page. Otherwise, goes to login */}
+            {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
           </Routes>
         </div>
