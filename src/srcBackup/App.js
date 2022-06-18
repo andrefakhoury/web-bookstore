@@ -16,7 +16,7 @@ function App() {
       setLoggedUser(user);
     }
     getUser();
-  }, [])
+  })
 
   const updateProfile = async (id, newUser) => {
     const oldUser = await fetchUser(id);

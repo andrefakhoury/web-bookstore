@@ -11,12 +11,12 @@
     },
     {
       "id": 2,
-      "userName": "davidasaAAAA",
-      "address": "Rua do Davidasdasd",
+      "userName": "David Cairuz",
+      "address": "Rua do David",
       "email": "david@gmail.com",
       "password": "david",
-      "phone": "asdassadasd",
-      "admin": true
+      "admin": true,
+      "phone": "+5511123456789"
     },
     {
       "id": 3,
