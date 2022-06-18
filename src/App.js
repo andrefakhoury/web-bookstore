@@ -42,9 +42,11 @@ function App() {
         <div id="content-wrap">
           <Header/>
           <Routes>
+            {/* Default path is /home?all */}
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book/>}/>
+            {/* If logged in, goest o user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
           </Routes>
         </div>

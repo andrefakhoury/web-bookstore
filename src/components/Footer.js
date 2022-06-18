@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <>
+      {/* Clear all floats/left identations */}
       <div className="pre-footer"></div>
+      {/* Footer to show all map links */}
       <footer className="footer">
         <span>Quick links:</span>
         <div className="quick-links">

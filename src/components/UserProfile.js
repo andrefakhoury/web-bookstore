@@ -5,6 +5,7 @@ import FormField from "./FormField"
 
 const UserProfile = ({user, onUpdate}) => {
   let navigate = useNavigate();
+  // States for each field
   const [userName, setUserName] = useState(user.userName);
   const [address, setAddress] = useState(user.address);
   const [email, setEmail] = useState(user.email);
@@ -13,9 +14,10 @@ const UserProfile = ({user, onUpdate}) => {
   const [newPassword, setNewPassword] = useState();
   const [confirmNewPassword, setConfirmNewPassword] = useState();
 
+  // Check if user is invalid
   useEffect(() => {
     if (!user.id)
-      navigate({pathname: "/"}, {replace: true});
+      navigate({pathname: "/login"}, {replace: true});
   }, [user, navigate])
 
   const onSubmit = (e) => {
