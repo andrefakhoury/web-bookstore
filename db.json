@@ -40,8 +40,8 @@
   "books": [
     {
       "id": 1,
-      "title": "Sample Book 1",
-      "author": "Author 1",
+      "title": "Hello I'm a sample book",
+      "author": "And I'm a sample author",
       "description": "Lorem ipsum 1",
       "category": "biography",
       "qttStock": 6,

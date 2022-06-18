@@ -11,13 +11,23 @@ export function verifyEmail(email, errorMessage) {
     throw errorMessage;
 }
 
+// Verify if two objects are equal, throw message if not
 export function verifyEqual(val1, val2, errorMessage) {
   if (val1 !== val2)
     throw errorMessage;
 }
 
-// Return an array of 'size' random samples from arr
-export async function getRandomSubarray(arr, size) {
+// Clamp a string to a given size
+export function clampString(str, maxSize) {
+  if (maxSize + 3 > str.length) {
+    return str;
+  } else {
+    return `${str.substr(0, maxSize)}...`;
+  }
+}
+
+// Return an array of 'size' related books samples from arr to book
+export async function getRelatedBooks(book, arr, size) {
   let shuffled = arr.slice(0), i = arr.length, min = i - size, temp, index;
   while (i-- > min) {
     index = Math.floor((i + 1) * Math.random());
@@ -35,6 +45,7 @@ export async function fetchBook(id){
   return data;
 }
 
+// Fetch from database
 export async function fetchBooks(genre) {
   let booksToFetch = `?category=${genre}`;
   if (genre === "" || genre === "all")

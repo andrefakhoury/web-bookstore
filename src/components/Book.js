@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { fetchBook, fetchBooks, getRandomSubarray } from "../utils";
+import { fetchBook, fetchBooks, getRelatedBooks } from "../utils";
 import BookCard from "./BookCard";
 
-const Book = () => {
+const Book = ({onAddToCart}) => {
   let navigate = useNavigate();
   const [book, setBook] = useState({});
   const [relatedBooks, setRelatedBooks] = useState([]);
@@ -20,10 +20,16 @@ const Book = () => {
 
       // fetch related books
       const allBooksFromServer = await fetchBooks("all");
-      setRelatedBooks(await getRandomSubarray(allBooksFromServer, 5));
+      setRelatedBooks(await getRelatedBooks(bookFromServer, allBooksFromServer, 5));
     }
     getBook()
   }, [bookId, navigate])
+
+  const onClick = (e) => {
+    onAddToCart(bookId, 1);
+    alert("Successfully added!");
+    navigate("/cart");
+  }
 
   const images = require.context('../../public/images', true);
   let imageSource = images("./book_cover.png");
@@ -32,17 +38,35 @@ const Book = () => {
   } catch(e) {}
 
   return (
-    <div>
-      <h1>Book details</h1>
-      <div className="center book-info">
-        <img alt="Book cover" className="book-cover" src={imageSource}/>
-        {/* <span className="book-price">${book.price}</span> */}
-        <div className="book-inner">
-          <h2>{book.title}</h2>
-          <h3>{book.author} - {book.category}</h3>
-          <p>{book.description}</p>
-        </div>
+    <div className="center">
+      <h1>{book.title}</h1>
+
+      {/* Book details */}
+      <div className="container-fluid">
+        <div className="row">
+        <div className="col-md-auto">
+            <div className="card" style={{width: "18rem", borderWidth: "0"}}>
+              <img alt="Book cover" className="card-img-top" src={imageSource}/>
+              <div className="card-body justify-content-center">
+                <h5 className="book-price">${book.price}</h5>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-auto">
+            <div className="book-info" style={{width: "18rem"}}>
+              <h2>{book.author}</h2>
+              <h3>{book.category}</h3>
+              <p>{book.description}</p>
+              <button type="button"
+                style={{position: "absolute",width: "100%"}} className="btn btn-primary btn-lg"
+                onClick={onClick}
+              >Add to cart</button>
+            </div>
+          </div>
+        </div>        
       </div>
+
+      {/* Related books */}
       <div id="related-books">
         <h3>Related books</h3>
         {

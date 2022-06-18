@@ -6,9 +6,11 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import UserProfile from "./components/UserProfile";
 import { fetchBooks, fetchUser } from './utils';
+import Cart from './components/Cart';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({});
+  const [cartItems, setCartItems] = useState({});
 
   useEffect(() => {
     const getUser = async () => {
@@ -35,6 +37,13 @@ function App() {
     const data = await res.json();
     setLoggedUser(data);
   }
+
+  const addToCart = (bookId, qtt) => {
+    let oldAmmount = cartItems[bookId];
+    if (!oldAmmount) oldAmmount = 0;
+    cartItems[bookId] = oldAmmount + qtt;
+    setCartItems(cartItems);
+  };
   
   return (
     <Router>
@@ -45,7 +54,8 @@ function App() {
             {/* Default path is /home?all */}
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
-            <Route path='/book' element={<Book/>}/>
+            <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
+            <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
             {/* If logged in, goest o user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
           </Routes>
