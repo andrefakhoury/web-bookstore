@@ -12,13 +12,20 @@ function App() {
   const [loggedUser, setLoggedUser] = useState({});
   const [cartItems, setCartItems] = useState({});
 
+  // Set logged user information
   useEffect(() => {
     const getUser = async () => {
       const user = await fetchUser(2);
       setLoggedUser(user);
     }
     getUser();
-  }, [])
+  }, []);
+
+  // Get cart items from local storage on startup
+  useEffect(() => {
+    const data = window.localStorage.getItem("LOCAL_CART_ITEMS");
+    setCartItems(JSON.parse(data));
+  }, []);
 
   const updateProfile = async (id, newUser) => {
     const oldUser = await fetchUser(id);
@@ -43,6 +50,9 @@ function App() {
     if (!oldAmmount) oldAmmount = 0;
     cartItems[bookId] = oldAmmount + qtt;
     setCartItems(cartItems);
+
+  // Save cart items from local storage
+    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
   
   return (
