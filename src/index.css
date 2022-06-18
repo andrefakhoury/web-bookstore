@@ -1,43 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Kadwa&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-body { 
-  margin: 0;
-  font-family: Kadwa;
-}
-
-header {
-  width: 100%;
-	height: 120;
-	background-color: #1D91E5;
-	text-align: center;
-	top: 0;
-	overflow: hidden;
-}
-
-.color-change {
-  color: #000;
-}
-.color-change:hover {
-  color: rgb(67, 67, 67);
-}
-
 #App {
   position: relative;
   min-height: 100vh;
 }
 
-.header {
-  text-align: center;
+body { 
+  margin: 0;
+  font-family: Kadwa;
 }
 
-.header a {
-  text-decoration: none;
+.color-change {
+  color: #000;
 }
 
-.logo {
-  width: 80px;
-  vertical-align:middle;
+.color-change:hover {
+  color: rgb(67, 67, 67);
 }
 
 .title {
@@ -51,39 +30,22 @@ header {
   text-decoration: none;
 }
 
-nav {
-  background-color: #bbd1e0;
-  height: 90%;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.header-link {
-  padding: 14px 16px;
-  color: rgba(0,0,0,1);
-  font-family: Kadwa;
-  font-weight: Regular;
-  font-size: 20px;
-  text-decoration: none;
-}
-
 .pre-footer {
   clear: both;
-  height: 7.3rem;
+  height: 7.2rem;
 }
 
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 5.3rem;
+  height: 5.2rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   background-color: #1D91E5;
   text-align: center;
   color: rgba(0,0,0,1);
-  font-family: Kadwa;
+  font-family: Open Sans;
   font-weight: Regular;
   font-size: 20px;
 }
@@ -101,20 +63,6 @@ nav a:hover, .footer a:hover{
   text-decoration:none;
   color: #424242;
   font-weight:bold;
-}
-
-.cart {
-  float: right;
-  width:40px;
-  margin-right: 20px;
-  vertical-align: middle;
-}
-
-.profile {
-  float: right;
-  width: 40px;
-  margin-right: 20px;
-  vertical-align: middle;
 }
 
 div.gallery {
@@ -193,28 +141,6 @@ div.desc {
   padding: 1px;
   float: right;
 }
-
-/* .book-info {
-  background-color: #1D91E5;
-  width: 100%;
-  position: relative;
-}
-.book-left {
-  background-color: blue;
-  text-align: center;
-  width: 30%;
-}
-.book-cover {
-  max-width: 200px;
-}
-.book-right {
-  width: 60%;
-  float: right;
-  background-color: #3E3E3E;
-  position: absolute;
-} */
-
-
 
 .center h1 {
   text-align: center;
