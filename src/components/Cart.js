@@ -1,14 +1,32 @@
 import BookCard from "./BookCard"
+import { fetchBooksByIds } from "../utils"
+import { useState, useEffect, useRef } from 'react'
 
 const Cart = ({cartItems}) => {
+  const [books, setBooks] = useState([])
+  
+  useEffect(() => {
+    const getBooks = async () => {
+      let ids = Array.from( Object.entries(cartItems).map((bookInfo) => (bookInfo[0])));
+      const booksFromServer = await fetchBooksByIds(ids);
+      setBooks(booksFromServer)
+    }
+    getBooks()
+  }, [cartItems])
+
+  
+  console.log(books)
+
   return (
     <div>
       <h1>Cart</h1>
+      <div className="full-center">
       {
-        Object.entries(cartItems).map((bookInfo) => (
-          <p key={bookInfo[0]}>ID: {bookInfo[0]} - QTT: {bookInfo[1]}</p>
+        books.map((book) => (
+          <BookCard key={book.id} book={book}/>
         ))
       }
+      </div>
 
     </div>
   )

@@ -45,6 +45,16 @@ export async function fetchBook(id){
   return data;
 }
 
+export async function fetchBooksByIds(ids) {
+  let data = [];
+  for (var i = 0; i < ids.length; i++) {
+    const res = await fetch(`http://localhost:5000/books/${ids[i]}`);
+    const book = await res.json();
+    data.push(book);
+  }
+  return data;
+}
+
 // Fetch from database
 export async function fetchBooks(genre) {
   let booksToFetch = `?category=${genre}`;
