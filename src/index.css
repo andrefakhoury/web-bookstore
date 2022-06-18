@@ -15,6 +15,13 @@ header {
 	overflow: hidden;
 }
 
+.color-change {
+  color: #000;
+}
+.color-change:hover {
+  color: rgb(67, 67, 67);
+}
+
 #App {
   position: relative;
   min-height: 100vh;
@@ -41,10 +48,11 @@ header {
   font-size: 48px;
   text-align: center;
   vertical-align: middle;
+  text-decoration: none;
 }
 
 nav {
-  background-color: #aec6d7;
+  background-color: #bbd1e0;
   height: 90%;
   text-align: center;
   padding-top: 10px;
@@ -206,14 +214,7 @@ div.desc {
   position: absolute;
 } */
 
-.center {
-  align-items: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
-  font-family: Open Sans;
-}
+
 
 .center h1 {
   text-align: center;
@@ -226,7 +227,6 @@ div.desc {
   padding: 0 40px;
   box-sizing: border-box;
 }
-
 form .txt_field{
   position: relative;
   border-bottom: 2px solid #adadad;
