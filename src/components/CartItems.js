@@ -18,8 +18,10 @@ const CartItems = ({ books, cartArray }) => {
               books.map((book, index) => (
                 <tr key={book.id}>
                   <td>
-                    <img alt="Book Cover" src={images(`./${book.img}`)} width="70px"/>
-                    {clampString(book.title, 15)} - {clampString(book.author, 15)}
+                    <div className='book-container'>
+                      <img alt="Book Cover" src={images(`./${book.img}`)} width="70px"/>
+                    </div>
+                    <p className='cart'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
                   </td>
                   <td>{cartArray[index][1]}</td>
                   <td>$ {cartArray[index][1] * book.price}</td>
