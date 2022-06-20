@@ -1,4 +1,4 @@
-import { fetchBooksByIds, clampString } from "../utils"
+import { fetchBooksByIds } from "../utils"
 import FormField from "./FormField"
 import { useState, useEffect } from 'react'
 import CartItems from "./CartItems"
@@ -37,7 +37,7 @@ const Checkout = ({cartItems}) => {
             <FormField label="Exp. Date" value={exp} isRequired={true} setText={setExp}/>
             <FormField label="CVC" value={cvc} isRequired={true} setText={setCVC}/>
             <FormField label="Cardholder Name" value={holderName} isRequired={true} setText={setHolderName}/>
-            <input type="submit" value="Sign Up"/>
+            <input type="submit" value="Confirm Order"/>
         </form>
     </div>
   )
