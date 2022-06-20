@@ -1,8 +1,9 @@
-import BookCard from "./BookCard"
 import { fetchBooksByIds, clampString } from "../utils"
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Cart = ({cartItems}) => {
+  let navigate = useNavigate();
   // const [books, setBooks] = useState([])
   // useEffect(() => {
   //   const getBook = async (bookInfo) => {
@@ -24,6 +25,8 @@ const Cart = ({cartItems}) => {
   }, [cartItems])
 
 
+
+
   console.log(books)
   const images = require.context('../../public/images', true);
 
@@ -36,7 +39,7 @@ const Cart = ({cartItems}) => {
             <tr>
               <th>Item</th>
               <th>Quantity</th>
-              <th>Total Price</th>
+              <th>Sub Total</th>
             </tr>
           </thead>
           <tbody>
@@ -51,10 +54,13 @@ const Cart = ({cartItems}) => {
                   <td>{cartArray[index][1]}</td>
                   <td>{cartArray[index][1] * book.price}</td>
                 </tr>
+                
               ))
             }
           </tbody>
         </table>
+            <p>FINAL PRICE: {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
+            <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
       </div>
     </div>
   )

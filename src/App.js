@@ -4,6 +4,7 @@ import Book from "./components/Book";
 import Books from "./components/Books";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import { fetchUser } from './utils';
 import Cart from './components/Cart';
@@ -46,6 +47,16 @@ function App() {
     setLoggedUser(data);
   }
 
+  const createProfile = async (newUser) => {
+    const res = await fetch(`http://localhost:5000/users/`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newUser)
+    });
+    const data = await res.json();
+    setLoggedUser(data);
+  }
+
   const addToCart = (bookId, qtt) => {
     let oldAmmount = cartItems[bookId];
     if (!oldAmmount) oldAmmount = 0;
@@ -69,6 +80,7 @@ function App() {
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
+            <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
           </Routes>
         </div>
       <Footer/>
