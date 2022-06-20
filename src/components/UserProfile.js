@@ -6,8 +6,6 @@ import FormField from "./FormField"
 const UserProfile = ({user, onUpdate}) => {
   let navigate = useNavigate();
   
-  const [searchParams, setSearchParams] = useSearchParams();
-  
   // States for each field
   const [userName, setUserName] = useState(user.userName);
   const [address, setAddress] = useState(user.address);

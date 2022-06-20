@@ -5,6 +5,7 @@ import Books from "./components/Books";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import UserProfile from "./components/UserProfile";
+import UpdateUserProfile from "./components/UpdateUserProfile"
 import { fetchUser } from './utils';
 import Cart from './components/Cart';
 
@@ -69,6 +70,7 @@ function App() {
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
+            <Route path='/user/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
           </Routes>
         </div>
       <Footer/>
