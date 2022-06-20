@@ -14,20 +14,15 @@ const Cart = ({cartItems}) => {
     getBooks()
   }, [cartItems])
 
-  
-  console.log(books)
-
   return (
     <div>
-      <h1>Cart</h1>
-      <div className="full-center">
-      {
-        books.map((book) => (
-          <BookCard key={book.id} book={book}/>
-        ))
-      }
-      </div>
 
+      <h2 className="cart-title">Cart</h2>
+      <div className="cart">
+            <CartItems books={books} cartArray={cartArray}/>
+            <p>FINAL PRICE: $ {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
+            <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
+      </div>
     </div>
   )
 }

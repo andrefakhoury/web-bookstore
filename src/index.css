@@ -98,6 +98,78 @@ div.desc {
   white-space: nowrap;
 }
 
+ div.book-container{
+  background-color: grey;
+  padding: 3px;
+  width: 110px;
+  float:left;
+}
+
+div.book-container img {
+  padding: 10px;
+  width: 100px;
+  height: auto;
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+p.cart-item{
+  float: left;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 5px;
+}
+
+div.cart{
+  text-align: center;
+}
+
+div.cart p{
+  text-align: right;
+  margin-right: 25%
+}
+
+div.cart button{
+  background-color: rgb(0, 166, 255);
+  width: 30%;
+  font-family: Kadwa;
+  font-size: 20px;
+  color: white;
+}
+
+h2.cart-title{
+  margin: 20px
+}
+
+table {
+  table-layout: fixed;
+  width: 60%;
+  border-collapse: collapse;
+  margin: 0 20% 0 20%;
+  
+}
+
+th, td {
+  text-align: center;
+  padding: 20px;
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 15%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
 #related-books {
   padding: 1%;
 }

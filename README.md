@@ -44,16 +44,38 @@ Screen mockups are available in this repository and can be found in [mockup](/mo
 
 ## 3. Comments about the code
 
+Bootstrap is being used to facilitate the design model and development.
+
 ## 4. Test plan
+
+The application was built and tested using Firefox and Google Chrome, on the most famous Operational Systems available: Windows, Linux (Ubuntu/Mint) and MacOS.
 
 ## 5. Test results
 
+The site behavior seems to be flawless, with everything working correctly and with a short response time. The design is responsive, working as expected on both mobile and desktop.
+
 ## 6. Build procedures
 
-First of all, install all dependencies: `npm install`
+It's necessary to have `npm` previously installed.
 
-Start localhost server: `npm start`
+First of all, clone this repository locally in your machine, and unzip it somewhere;
+
+Then install all dependencies: `npm install`;
+
+Start localhost instance: `npm start`;
+
+Start the mock json database: `npm run server`;
+
+After that, the server will be up and running on `localhost:3000/`, and the mock database will be available at `localhost:5000`.
 
 ## 7. Problems
 
+No comments yet.
+
 ## 8. Comments
+
+Some of frameworks, libraries and technologies used were:
+- Figma (mockup)
+- Bootstrap (CSS)
+- React (front-end)
+- JSON-server (DB mockup)
