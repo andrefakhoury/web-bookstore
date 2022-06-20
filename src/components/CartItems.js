@@ -7,9 +7,9 @@ const CartItems = ({ books, cartArray }) => {
     <table>
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Sub Total</th>
+              <th>ITEM</th>
+              <th>QUANTITY</th>
+              <th>SUB TOTAL</th>
             </tr>
           </thead>
           <tbody>
@@ -21,7 +21,7 @@ const CartItems = ({ books, cartArray }) => {
                     <div className='book-container'>
                       <img alt="Book Cover" src={images(`./${book.img}`)} width="70px"/>
                     </div>
-                    <p className='cart'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
+                    <p className='cart-item'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
                   </td>
                   <td>{cartArray[index][1]}</td>
                   <td>$ {cartArray[index][1] * book.price}</td>

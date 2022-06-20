@@ -30,8 +30,8 @@ const Cart = ({cartItems}) => {
 
   return (
     <div>
-      <h1>Cart</h1>
-      <div className="full-center">
+      <h2 className="cart-title">Cart</h2>
+      <div className="cart">
             <CartItems books={books} cartArray={cartArray}/>
             <p>FINAL PRICE: $ {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
             <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
