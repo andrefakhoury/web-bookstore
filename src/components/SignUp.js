@@ -25,14 +25,16 @@ const SignUp = ({ onAdd }) => {
 
         const password = Password;
 
-        const updatedUser = {
+        const newUser = {
             userName: userName,
             address: address,
             password: password,
-            phone: phoneNumber
+            phone: phoneNumber,
+            email: email,
+            admin: false
         };
 
-        onAdd(updatedUser);
+        onAdd(newUser);
         alert("Successfully signed up!");
         navigate("/");
     } catch(e) {

@@ -16,7 +16,7 @@ const Login = ({ logUser }) => {
         setUser(user_mail)
       }
     getUser()
-  }, [user])
+  }, [email])
 
   const onSubmit = (e) => {
     e.preventDefault();

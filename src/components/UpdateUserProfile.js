@@ -8,7 +8,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
   
   const [searchParams, setSearchParams] = useSearchParams();
   const userId = searchParams.get('id')
-  console.log(!userId)
+  console.log(loggedUser)
   
   // States for each field
   const [user, setUser] = useState({})
@@ -19,8 +19,8 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
 
   // Check if user is invalid
   useEffect(() => {
-    if (loggedUser.admin == false || !userId)
-      navigate({pathname: "/user"}, {replace: true});
+    if (!loggedUser || !loggedUser.admin || !userId)
+      navigate({pathname: "/"});
 
     const getUser = async () => {
       const user = await fetchUser(userId);
