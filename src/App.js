@@ -16,15 +16,6 @@ function App() {
   const [loggedUser, setLoggedUser] = useState({});
   const [cartItems, setCartItems] = useState(new Map());
 
-  // Set logged user information
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const user = await fetchUser(2);
-  //     setLoggedUser(user);
-  //   }
-  //   getUser();
-  // }, []);
-
   // Get cart items from local storage on startup
   useEffect(() => {
     const data = window.localStorage.getItem("LOCAL_CART_ITEMS");
@@ -69,6 +60,12 @@ function App() {
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
+
+  const clearCart = () =>{
+    setCartItems([])
+    // Save cart items from local storage
+    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
+  }
   
   return (
     <Router>
@@ -81,7 +78,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems} onCheckout={clearCart}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
