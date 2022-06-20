@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useNavigate } from 'react'
 import Book from "./components/Book";
 import Books from "./components/Books";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import UserProfile from "./components/UserProfile";
 import UpdateUserProfile from "./components/UpdateUserProfile"
-import { fetchUser } from './utils';
+import UpdateBookInfo from './components/UpdateBookInfo';
+import { fetchUser, fetchBook } from './utils';
 import Cart from './components/Cart';
 
 function App() {
@@ -47,6 +48,24 @@ function App() {
     setLoggedUser(data);
   }
 
+  const updateBook = async (id, newBook) => {
+    const oldBook = await fetchBook(id);
+    const updatedBook = {
+      ...oldBook,
+      title: newBook.title,
+      author: newBook.author,
+      description: newBook.description,
+      category: newBook.category,
+      price: newBook.price
+    };
+    const res = await fetch(`http://localhost:5000/books/${id}`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(updatedBook)
+    });
+    const data = await res.json();
+  }
+
   const addToCart = (bookId, qtt) => {
     let oldAmmount = cartItems[bookId];
     if (!oldAmmount) oldAmmount = 0;
@@ -71,6 +90,7 @@ function App() {
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/user/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
+            <Route path='/book/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
           </Routes>
         </div>
       <Footer/>

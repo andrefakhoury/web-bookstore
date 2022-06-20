@@ -60,7 +60,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
       <form onSubmit={onSubmit}>
         <FormField label="Name" value={userName} isRequired={true} setText={setUserName}/>
         <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
-        <FormField label="Email" value={email} isDisabled={true} isRequired={true} setText={setEmail}/>
+        <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
         <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>
         <input type="submit" value="Update information"/>
       </form>
