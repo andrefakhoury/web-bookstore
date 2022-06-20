@@ -24,7 +24,7 @@ const CartItems = ({ books, cartArray }) => {
                     <p className='cart-item'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
                   </td>
                   <td>{cartArray[index][1]}</td>
-                  <td>$ {cartArray[index][1] * book.price}</td>
+                  <td>$ {(cartArray[index][1] * book.price).toFixed(2)}</td>
                 </tr>
                 
               ))
