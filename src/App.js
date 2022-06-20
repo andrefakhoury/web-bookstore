@@ -9,6 +9,8 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import { fetchUser } from './utils';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({});
@@ -79,6 +81,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
