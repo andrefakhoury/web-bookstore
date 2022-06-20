@@ -4,6 +4,7 @@ import Book from "./components/Book";
 import Books from "./components/Books";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import { fetchUser } from './utils';
@@ -14,13 +15,13 @@ function App() {
   const [cartItems, setCartItems] = useState(new Map());
 
   // Set logged user information
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await fetchUser(2);
-      setLoggedUser(user);
-    }
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const user = await fetchUser(2);
+  //     setLoggedUser(user);
+  //   }
+  //   getUser();
+  // }, []);
 
   // Get cart items from local storage on startup
   useEffect(() => {
@@ -81,6 +82,8 @@ function App() {
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
+            <Route path='/login' element={<Login logUser={setLoggedUser}/>}/>
+
           </Routes>
         </div>
       <Footer/>

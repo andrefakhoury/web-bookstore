@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { verifyPassword, verifyEmail, verifyEqual, fetchUser } from "../utils"
+import { verifyPassword, verifyEmail, verifyEqual } from "../utils"
 import FormField from "./FormField"
 
 const SignUp = ({ onAdd }) => {
