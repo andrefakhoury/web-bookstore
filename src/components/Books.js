@@ -1,12 +1,13 @@
 import BookCard from "./BookCard"
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { fetchBooks } from "../utils"
 
 const Books = () => {
   let navigate = useNavigate();
   const [books, setBooks] = useState([])
-  const genre = useLocation().search.substring(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const genre = searchParams.get('genre')
   const mapGenre = useRef({
     "": "Trending now",
     "all": "Trending now",
@@ -20,7 +21,8 @@ const Books = () => {
 
   useEffect(() => {
     if (!(genre in mapGenre.current)) {
-      navigate({pathname: "/home", search: "all"}, {replace: true});
+      setSearchParams({'genre':'all'})
+      navigate({pathname: "/home", search:"genre=all"}, {replace: true});
     }
 
     const getBooks = async () => {
