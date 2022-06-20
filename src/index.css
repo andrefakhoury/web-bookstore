@@ -99,6 +99,29 @@ div.desc {
   white-space: nowrap;
 }
 
+table {
+  table-layout: fixed;
+  width: 60%;
+  border-collapse: collapse;
+  margin: 0 20% 0 20%;
+}
+
+th, td {
+  padding: 20px;
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 15%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
 #related-books {
   padding: 1%;
 }

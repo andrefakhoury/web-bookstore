@@ -1,6 +1,7 @@
 import { fetchBooksByIds, clampString } from "../utils"
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import CartItems from "./CartItems"
 
 const Cart = ({cartItems}) => {
   let navigate = useNavigate();
@@ -25,41 +26,14 @@ const Cart = ({cartItems}) => {
   }, [cartItems])
 
 
-
-
   console.log(books)
-  const images = require.context('../../public/images', true);
 
   return (
     <div>
       <h1>Cart</h1>
       <div className="full-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Sub Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Cada livro é um tr */}
-            {
-              books.map((book, index) => (
-                <tr key={book.id}>
-                  <td>
-                    <img alt="Book Cover" src={images(`./${book.img}`)} width="100px"/>
-                    {clampString(book.title, 15)} - {clampString(book.author, 15)}
-                  </td>
-                  <td>{cartArray[index][1]}</td>
-                  <td>{cartArray[index][1] * book.price}</td>
-                </tr>
-                
-              ))
-            }
-          </tbody>
-        </table>
-            <p>FINAL PRICE: {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
+            <CartItems books={books} cartArray={cartArray}/>
+            <p>FINAL PRICE: $ {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
             <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
       </div>
     </div>
