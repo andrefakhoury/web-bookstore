@@ -11,6 +11,12 @@ export function verifyEmail(email, errorMessage) {
     throw errorMessage;
 }
 
+// Checks whether given email is valid (email@domain.com|edu|br)
+export function verifyUser(user, errorMessage) {
+  if(user.length == 0)
+    throw errorMessage;
+}
+
 // Verify if two objects are equal, throw message if not
 export function verifyEqual(val1, val2, errorMessage) {
   if (val1 !== val2)
@@ -45,6 +51,16 @@ export async function fetchBook(id){
   return data;
 }
 
+export async function fetchBooksByIds(ids) {
+  let data = [];
+  for (var i = 0; i < ids.length; i++) {
+    const res = await fetch(`http://localhost:5000/books/${ids[i]}`);
+    const book = await res.json();
+    data.push(book);
+  }
+  return data;
+}
+
 // Fetch from database
 export async function fetchBooks(genre) {
   let booksToFetch = `?category=${genre}`;
@@ -59,6 +75,13 @@ export async function fetchBooks(genre) {
 // Fetch from database
 export async function fetchUser(id){
   const res = await fetch(`http://localhost:5000/users/${id}`);
+  const data = await res.json();
+  return data;
+}
+
+export async function fetchUserbyEmail(email){
+  // TODO treat error
+  const res = await fetch(`http://localhost:5000/users/?email=${email}`);
   const data = await res.json();
   return data;
 }
