@@ -63,7 +63,7 @@ function App() {
           <Header/>
           <Routes>
             {/* Default path is /home?all */}
-            <Route path="/" element={<Navigate to={{pathname: "/home", search: "all"}}/>}/>
+            <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { verifyPassword, verifyEmail, verifyEqual, fetchUser } from "../utils"
 import FormField from "./FormField"
 
 const UserProfile = ({user, onUpdate}) => {
   let navigate = useNavigate();
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  
   // States for each field
   const [userName, setUserName] = useState(user.userName);
   const [address, setAddress] = useState(user.address);

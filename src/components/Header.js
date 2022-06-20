@@ -8,7 +8,7 @@ const Header = () => {
     <>
     <nav className="navbar navbar-expand-lg navbar-dark justify-content-center" style={{backgroundColor: "#1D91E5"}}>
       {/* Logo */}
-      <Link to={{pathname: "/home", search:"all"}}>
+      <Link to={{pathname: "/home", search:"genre=all"}}>
         <img width="50" alt="Logo" src={images("./logo.png")}/>
         <span className="title navbar-brand">Bookstore</span>
       </Link>
@@ -21,12 +21,12 @@ const Header = () => {
       {/* Inner links */}
       <div className="collapse navbar-collapse mx-auto" id="navbarText">
       <ul className="navbar-nav mr-auto">
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"biography"}}>biography</Link></li>
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"classics"}}>classics</Link></li>
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"comics"}}>comics & mangas</Link></li>
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"fantasy"}}>fantasy & sci-fi</Link></li>
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"humor"}}>humor</Link></li>
-          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"romance"}}>romance</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=biography"}}>biography</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=classics"}}>classics</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=comics"}}>comics & mangas</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=fantasy"}}>fantasy & sci-fi</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=humor"}}>humor</Link></li>
+          <li className="nav-item"><Link className="nav-link" to={{pathname: "/home", search:"genre=romance"}}>romance</Link></li>
         </ul>
         {/* Cart and User icons */}
         <ul className="navbar-nav mr-right">
