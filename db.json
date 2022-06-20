@@ -1,0 +1,262 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userName": "admin",
+      "address": "Mock Street",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "phone": "+551140028922",
+      "admin": true
+    },
+    {
+      "id": 2,
+      "userName": "David Cairuz",
+      "address": "Rua do David",
+      "email": "david@gmail.com",
+      "password": "david",
+      "admin": true,
+      "phone": "+5511123456789"
+    },
+    {
+      "id": 3,
+      "userName": "fakhoury",
+      "address": "Rua do Fakhoury",
+      "email": "andre@gmail.com",
+      "password": "fakhoury",
+      "phone": "+5514321456789",
+      "admin": false
+    },
+    {
+      "id": 4,
+      "userName": "joaogui1",
+      "address": "Joao Guilherme Rua",
+      "email": "joaogui1@gmail.com",
+      "password": "joaoguilherme",
+      "phone": "+5516321456789",
+      "admin": true
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "Hello I'm a sample book",
+      "author": "And I'm a sample author",
+      "description": "Lorem ipsum 1",
+      "category": "biography",
+      "qttStock": 6,
+      "qttSold": 2,
+      "price": "1.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 2,
+      "title": "Sample Book 2",
+      "author": "Author 2",
+      "description": "Lorem ipsum 2",
+      "category": "biography",
+      "qttStock": 7,
+      "qttSold": 3,
+      "price": "2.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 3,
+      "title": "Sample Book 3",
+      "author": "Author 3",
+      "description": "Lorem ipsum 3",
+      "category": "comics",
+      "qttStock": 8,
+      "qttSold": 4,
+      "price": "3.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 4,
+      "title": "Sample Book 4",
+      "author": "Author 4",
+      "description": "Lorem ipsum 4",
+      "category": "humor",
+      "qttStock": 9,
+      "qttSold": 5,
+      "price": "4.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 5,
+      "title": "Sample Book 5",
+      "author": "Author 5",
+      "description": "Lorem ipsum 5",
+      "category": "humor",
+      "qttStock": 10,
+      "qttSold": 6,
+      "price": "5.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 6,
+      "title": "Sample Book 6",
+      "author": "Author 6",
+      "description": "Lorem ipsum 6",
+      "category": "biography",
+      "qttStock": 11,
+      "qttSold": 7,
+      "price": "6.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 7,
+      "title": "Sample Book 7",
+      "author": "Author 7",
+      "description": "Lorem ipsum 7",
+      "category": "comics",
+      "qttStock": 12,
+      "qttSold": 8,
+      "price": "7.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 8,
+      "title": "Sample Book 8",
+      "author": "Author 8",
+      "description": "Lorem ipsum 8",
+      "category": "fantasy",
+      "qttStock": 13,
+      "qttSold": 9,
+      "price": "8.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 9,
+      "title": "Sample Book 9",
+      "author": "Author 9",
+      "description": "Lorem ipsum 9",
+      "category": "biography",
+      "qttStock": 14,
+      "qttSold": 10,
+      "price": "9.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 10,
+      "title": "Sample Book 10",
+      "author": "Author 10",
+      "description": "Lorem ipsum 10",
+      "category": "comics",
+      "qttStock": 15,
+      "qttSold": 11,
+      "price": "10.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 11,
+      "title": "Sample Book 11",
+      "author": "Author 11",
+      "description": "Lorem ipsum 11",
+      "category": "biography",
+      "qttStock": 16,
+      "qttSold": 12,
+      "price": "11.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 12,
+      "title": "Sample Book 12",
+      "author": "Author 12",
+      "description": "Lorem ipsum 12",
+      "category": "biography",
+      "qttStock": 17,
+      "qttSold": 13,
+      "price": "12.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 13,
+      "title": "Sample Book 13",
+      "author": "Author 13",
+      "description": "Lorem ipsum 13",
+      "category": "comics",
+      "qttStock": 18,
+      "qttSold": 14,
+      "price": "13.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 14,
+      "title": "Sample Book 14",
+      "author": "Author 14",
+      "description": "Lorem ipsum 14",
+      "category": "comics",
+      "qttStock": 19,
+      "qttSold": 15,
+      "price": "14.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 15,
+      "title": "Sample Book 15",
+      "author": "Author 15",
+      "description": "Lorem ipsum 15",
+      "category": "classics",
+      "qttStock": 20,
+      "qttSold": 16,
+      "price": "15.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 16,
+      "title": "Sample Book 16",
+      "author": "Author 16",
+      "description": "Lorem ipsum 16",
+      "category": "biography",
+      "qttStock": 21,
+      "qttSold": 17,
+      "price": "16.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 17,
+      "title": "Sample Book 17",
+      "author": "Author 17",
+      "description": "Lorem ipsum 17",
+      "category": "romance",
+      "qttStock": 22,
+      "qttSold": 18,
+      "price": "17.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 18,
+      "title": "Sample Book 18",
+      "author": "Author 18",
+      "description": "Lorem ipsum 18",
+      "category": "fantasy",
+      "qttStock": 23,
+      "qttSold": 19,
+      "price": "18.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 19,
+      "title": "Sample Book 19",
+      "author": "Author 19",
+      "description": "Lorem ipsum 19",
+      "category": "biography",
+      "qttStock": 24,
+      "qttSold": 20,
+      "price": "19.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 20,
+      "title": "Sample Book 20",
+      "author": "Author 20",
+      "description": "Lorem ipsum 20",
+      "category": "humor",
+      "qttStock": 25,
+      "qttSold": 21,
+      "price": "20.99",
+      "img": "book_cover.png"
+    }
+  ]
+}

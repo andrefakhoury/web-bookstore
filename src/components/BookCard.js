@@ -1,12 +1,19 @@
-import bookCover from "../img/book_cover.png"
+import { Link } from 'react-router-dom';
+import { clampString } from '../utils';
 
-const BookCard = () => {
+const BookCard = ({book}) => {
+  const images = require.context('../../public/images', true);
+  
   return (
-    <div class="gallery">
-      <a href="#">
-        <img src={bookCover}/>
-        <div class="desc">Sample Book<br/>Sample Author<br/><br/><b>$19.99</b></div>
-      </a>
+    <div className="gallery">
+      <Link to={{pathname: "/book", search: `${book.id}`}}>
+        <img alt="Book Cover" src={images(`./${book.img}`)}/>
+        <div className="desc">
+          {clampString(book.title, 15)}<br/>
+          {clampString(book.author, 15)}<br/><br/>
+          <b>${book.price}</b>
+        </div>
+      </Link>
     </div>
   )
 }

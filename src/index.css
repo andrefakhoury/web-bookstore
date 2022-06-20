@@ -1,32 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Kadwa&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-body { 
-  margin: 0;
-  font-family: Kadwa;
-}
-
-header {
-  width: 100%;
-	height: 120;
-	background-color: #1D91E5;
-	text-align: center;
-	top: 0;
-	overflow: hidden;
-}
-
 #App {
   position: relative;
   min-height: 100vh;
 }
 
-.header {
-  text-align: center;
+body { 
+  margin: 0;
+  font-family: Kadwa;
 }
 
-.logo {
-  width: 80px;
-  vertical-align:middle;
+.color-change {
+  color: #000;
+}
+
+.color-change:hover {
+  color: rgb(67, 67, 67);
 }
 
 .title {
@@ -37,41 +27,25 @@ header {
   font-size: 48px;
   text-align: center;
   vertical-align: middle;
-}
-
-nav {
-  background-color: #aec6d7;
-  height: 40px;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-nav a {
-  padding: 14px 16px;
-  color: rgba(0,0,0,1);
-  font-family: Kadwa;
-  font-weight: Regular;
-  font-size: 20px;
   text-decoration: none;
 }
 
 .pre-footer {
   clear: both;
-  height: 7.3rem;
+  height: 7.2rem;
 }
 
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 5.3rem;
+  height: 5.2rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   background-color: #1D91E5;
   text-align: center;
   color: rgba(0,0,0,1);
-  font-family: Kadwa;
+  font-family: Open Sans;
   font-weight: Regular;
   font-size: 20px;
 }
@@ -89,13 +63,6 @@ nav a:hover, .footer a:hover{
   text-decoration:none;
   color: #424242;
   font-weight:bold;
-}
-
-.cart {
-  float: right;
-  width:40px;
-  padding-right: 20px;
-  vertical-align: middle;
 }
 
 div.gallery {
@@ -128,15 +95,53 @@ div.gallery img {
 div.desc {
   padding: 15px;
   text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.center {
-  align-items: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
-  font-family: Open Sans;
+#related-books {
+  padding: 1%;
+}
+
+.book-info h2 {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;  
+  text-transform: uppercase;
+}
+.book-info h3 {
+  color: #3E3E3E;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+}
+.book-price {
+  font-family: 'Kadwa';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  color: #000000;
+}
+.book-info {
+  width: 100%;
+  padding: 5%;
+  height: auto;
+}
+.book-cover {
+  max-width: 200px;
+}
+.book-inner {
+  width: 70%;
+  padding: 1px;
+  float: right;
 }
 
 .center h1 {
@@ -150,7 +155,6 @@ div.desc {
   padding: 0 40px;
   box-sizing: border-box;
 }
-
 form .txt_field{
   position: relative;
   border-bottom: 2px solid #adadad;
@@ -189,6 +193,9 @@ form .txt_field{
 }
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label{
+  top: -5px;
+  color: #2691d9;
+}.txt_field input:disabled ~ label{
   top: -5px;
   color: #2691d9;
 }

@@ -1,13 +1,17 @@
+import { Link } from 'react-router-dom'
+
 const Footer = () => {
   return (
     <>
+      {/* Clear all floats/left identations */}
       <div className="pre-footer"></div>
+      {/* Footer to show all map links */}
       <footer className="footer">
         <span>Quick links:</span>
-        <div class="quick-links">
-          <a href="">home</a>&nbsp;|&nbsp; 
-          <a href="">cart</a>&nbsp;|&nbsp;
-          <a href="">user profile</a>
+        <div className="quick-links">
+          <Link to="/">home</Link>&nbsp;|&nbsp; 
+          <Link to="/cart">cart</Link>&nbsp;|&nbsp;
+          <Link to="/user">user profile</Link>
         </div>
       </footer>
     </>
