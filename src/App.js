@@ -13,6 +13,7 @@ import { fetchUser, fetchBook, fetchBooksByIds } from './utils';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import AdminPage from './components/AdminPage';
+import CreateBook from './components/CreateBook';
 
 
 function App() {
@@ -64,6 +65,16 @@ function App() {
     window.localStorage.setItem("LOGGED_USER_INFO", JSON.stringify(userId));
   });
 
+  const createProfile = async (newUser) => {
+    const res = await fetch(`http://localhost:5000/users/`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newUser)
+    });
+    const data = await res.json();
+    logUser(data.id);
+  }
+
   const updateProfile = async (id, newUser) => {
     const oldUser = await fetchUser(id);
     const updatedUser = {
@@ -82,6 +93,15 @@ function App() {
     setLoggedUser(data);
   }
 
+  const createBook = async (newBook) => {
+    const res = await fetch(`http://localhost:5000/books/`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newBook)
+    });
+    const data = await res.json();
+  }
+
   const updateBook = async (id, newBook) => {
     const oldBook = await fetchBook(id);
     const updatedBook = {
@@ -97,25 +117,6 @@ function App() {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(updatedBook)
-    });
-    const data = await res.json();
-  }
-    
-  const createProfile = async (newUser) => {
-    const res = await fetch(`http://localhost:5000/users/`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(newUser)
-    });
-    const data = await res.json();
-    logUser(data.id);
-  }
-
-  const createBook = async (newBook) => {
-    const res = await fetch(`http://localhost:5000/books/`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(newBook)
     });
     const data = await res.json();
   }
@@ -175,6 +176,7 @@ function App() {
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             
             <Route path='/users/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
+            <Route path='/books/create' element={<CreateBook loggedUser={loggedUser} onAdd={createBook}/>}/>
             <Route path='/books/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
             <Route path='/login' element={<Login logUser={logUser}/>}/>
