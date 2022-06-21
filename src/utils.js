@@ -48,14 +48,31 @@ export function clampString(str, maxSize) {
 
 // Return an array of 'size' related books samples from arr to book
 export async function getRelatedBooks(book, arr, size) {
-  let shuffled = arr.slice(0), i = arr.length, min = i - size, temp, index;
-  while (i-- > min) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
+  let bookScores = [];
+
+  // assign scores to each books
+  for (let curIndex in arr) {
+    const curBook = arr[curIndex];
+    // ignores given book
+    if (curBook.id === book.id) {
+      continue;
+    }
+    let categories = Object.entries(curBook);
+    let score = categories.reduce((pv, cv) => ( pv + (book[cv[0]] === cv[1] ? 1 : 0)), 0 ).toFixed(2);
+    
+    let curScores = [score, curIndex];
+
+    bookScores.push(curScores);
   }
-  return shuffled.slice(min);
+
+  // sort from largest to smallest
+  bookScores.sort((a, b) => {
+    return b[0] - a[0];
+  });
+
+  // choose first size elements
+  const chosen = bookScores.slice(0, Math.min(size, bookScores.length));
+  return chosen.map((el) => arr[el[1]]);
 }
 
 // Fetch from database
