@@ -81,7 +81,7 @@ const AdminPage = ({loggedUser}) => {
             <tbody>
                 <tr>
                   <td></td>
-                  <td>[+] Add new book</td>
+                  <td><Link to={{pathname: "/books/create"}}>[+] Add new book</Link></td>
                   </tr>
               {
                 content.map((book) => (

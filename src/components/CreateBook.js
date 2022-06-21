@@ -3,56 +3,43 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { fetchBook } from "../utils"
 import FormField from "./FormField"
 
-const UpdateBookInfo = ({loggedUser, onUpdate}) => {
+const CreateBook = ({loggedUser, onAdd}) => {
   let navigate = useNavigate();
   
-  const [searchParams, setSearchParams] = useSearchParams();
-  const bookId = searchParams.get('id')
-  
   // States for each field
-  const [book, setBook] = useState({})
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
   const [coverImage, setCoverImage] = useState("book_cover.png");
 
   // Check if user is invalid
   useEffect(() => {
-    if (!loggedUser || !loggedUser.admin || !bookId)
+    if (!loggedUser || !loggedUser.admin)
       navigate({pathname: "/home"}, {replace: true});
 
-    const getBook = async () => {
-      const book = await fetchBook(bookId);
-      setBook(book);
-      setTitle(book.title);
-      setAuthor(book.author);
-      setDescription(book.description);
-      setCategory(book.category);
-      setPrice(book.price);
-      setCoverImage(book.img);
-    } 
-    getBook();
-
-  }, [loggedUser, navigate, bookId])
+  }, [loggedUser, navigate])
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     // Verifies fields and update
     try {
-      const updatedBook = {
+      const newBook = {
         title: title,
         author: author,
         description: description,
         category: category,
-        price: price,
+        qttStock: parseInt(stock),
+        qttSold: 0,
+        price: parseFloat(price),
         img: coverImage.replace(/^.*\\/, "")
       };
 
-      onUpdate(book.id, updatedBook);
-      alert("Book successfully updated!");
+      onAdd(newBook);
+      alert("Book successfully created!");
       navigate("/admin?list=books");
     } catch(e) {
       alert(e);
@@ -67,7 +54,8 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         <FormField label="Author" value={author} isRequired={true} setText={setAuthor}/>
         <FormField label="Category" value={category} isRequired={true} setText={setCategory}/>
         <FormField label="Description" value={description} isRequired={true} setText={setDescription}/>
-        <FormField label="Price" value={price} isRequired={true} setText={setPrice}/>
+        <FormField label="Price" type="number" value={price} isRequired={true} setText={setPrice}/>
+        <FormField label="Stock" type="number" value={stock} isRequired={true} setText={setStock}/>
         <FormField type="file" setText={setCoverImage} />
         <input type="submit" value="Update information"/>
       </form>
@@ -75,4 +63,4 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
   )
 }
 
-export default UpdateBookInfo
+export default CreateBook
