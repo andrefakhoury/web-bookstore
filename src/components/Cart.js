@@ -21,7 +21,11 @@ const Cart = ({cartItems, cartObjects, addToCart, removeFromCart}) => {
           books.length > 0 ?
           <>
             <CartItems books={books} cartArray={cartArray} setBooks={setBooks} addToCart={addToCart} removeFromCart={removeFromCart}/>
-            <p>FINAL PRICE: $ {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
+            <p>FINAL PRICE: $ {
+              books.reduce((pv, v, index) => (
+                pv + (cartArray[index] ? v.price*cartArray[index][1] : 0)), 0
+              ).toFixed(2)
+            }</p>
             <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
           </>
            : <>The cart is empty...</>

@@ -33,7 +33,6 @@ function App() {
 
     const cartArray = Object.entries(dataInfo);
     const ids = Array.from( cartArray.map((bookInfo) => (bookInfo[0])));
-    console.log(ids);
     getCartObjects(ids);
   }, []);
 
@@ -134,13 +133,14 @@ function App() {
   };
 
   const removeFromCart = async (bookId, qtt) => {
-    let oldAmmount = cartItems[bookId];
-    if (oldAmmount === qtt){
-      delete cartItems[bookId]
+    const oldAmmount = cartItems[bookId];
+    
+    if (oldAmmount <= qtt) { // remove element
+      delete cartItems[bookId];
+    } else { // update element
+      cartItems[bookId] -= qtt;
     }
-    else if (oldAmmount > qtt){
-      cartItems[bookId] -= qtt
-    }
+
     setCartItems(cartItems);
     await updateCartObjects();
 

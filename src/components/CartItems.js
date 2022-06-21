@@ -16,7 +16,7 @@ const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart }) =>
             {/* Each book is a row */}
             {
               books.map((book, index) => (
-                <tr key={book.id}>
+                cartArray[index] && <tr key={book.id}>
                   <td>
                     <div className='book-container'>
                       <img alt="Book Cover" src={images(`./${book.img}`)} width="70px"/>
