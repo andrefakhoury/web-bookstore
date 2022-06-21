@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { verifyPassword, verifyEmail, verifyEqual } from "../utils"
 import FormField from "./FormField"
 
-const UserProfile = ({user, onUpdate}) => {
+const UserProfile = ({user, onUpdate, onLogOut}) => {
   let navigate = useNavigate();
   
   // States for each field
@@ -20,6 +20,12 @@ const UserProfile = ({user, onUpdate}) => {
     if (!user.id)
       navigate({pathname: "/login"}, {replace: true});
   }, [user, navigate])
+
+  const onClickLogout = (e) => {
+    onLogOut();
+    alert("Successfully logged out!");
+    navigate('/');
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -67,6 +73,7 @@ const UserProfile = ({user, onUpdate}) => {
         <FormField label="Confirm new password" type="password" setText={setConfirmNewPassword}/>
         <input type="submit" value="Update information"/>
       </form>
+      <button className="btn btn-lg" onClick={onClickLogout}>Log out...</button>
     </div>
   )
 }
