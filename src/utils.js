@@ -79,6 +79,13 @@ export async function fetchUser(id){
   return data;
 }
 
+// Fetch from database
+export async function fetchUsers(){
+  const res = await fetch(`http://localhost:5000/users`);
+  const data = await res.json();
+  return data;
+}
+
 export async function fetchUserbyEmail(email){
   // TODO treat error
   const res = await fetch(`http://localhost:5000/users/?email=${email}`);

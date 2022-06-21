@@ -50,7 +50,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
 
       onUpdate(book.id, updatedBook);
       alert("Book successfully updated!");
-      navigate("/");
+      navigate("/admin?list=books");
     } catch(e) {
       alert(e);
     }

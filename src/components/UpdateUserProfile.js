@@ -19,8 +19,8 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
 
   // Check if user is invalid
   useEffect(() => {
-    if (!loggedUser || !loggedUser.admin || !userId)
-      navigate({pathname: "/"});
+    // if (!loggedUser || !loggedUser.admin || !userId)
+    //   navigate({pathname: "/"});
 
     const getUser = async () => {
       const user = await fetchUser(userId);
@@ -48,7 +48,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
 
       onUpdate(user.id, updatedUser);
       alert("Successfully updated!");
-      navigate("/");
+      navigate("/admin?list=users");
     } catch(e) {
       alert(e);
     }
