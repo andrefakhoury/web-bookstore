@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { fetchBooks, fetchUsers } from "../utils"
-import FormField from "./FormField"
 
 const AdminPage = ({loggedUser}) => {
   let navigate = useNavigate();
@@ -23,14 +22,14 @@ const AdminPage = ({loggedUser}) => {
       setContent(users)
     }
     
-    if (list == 'books')
+    if (list === 'books')
       getBooks()
-    else if (list == 'users')
+    else if (list === 'users')
       getUsers()
 
-  }, [list])
+  }, [loggedUser, list, navigate])
   
-  if (list == 'users')
+  if (list === 'users')
     return (
       <div className="center">
         <h1>Admin Page</h1>
@@ -61,7 +60,7 @@ const AdminPage = ({loggedUser}) => {
       </div>
     )
 
-  else if (list == 'books')
+  else if (list === 'books')
     return (
       <div className="center">
         <h1>Admin Page</h1>
@@ -85,7 +84,7 @@ const AdminPage = ({loggedUser}) => {
                   </tr>
               {
                 content.map((book) => (
-                  <tr>
+                  <tr key={book.id}>
                     <td>{book.id}</td>
                     <td><Link to={{pathname: "/books/update", search:`id=${book.id}`}}>{book.title}</Link></td>
                     <td>{book.author}</td>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
-import { verifyPassword, verifyEmail, verifyEqual, fetchUser } from "../utils"
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { fetchUser } from "../utils"
 import FormField from "./FormField"
 
 const UpdateUserProfile = ({loggedUser, onUpdate}) => {

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "userName": "admin",
-      "address": "Mock Street",
+      "address": "Mock Street St.",
       "email": "admin@gmail.com",
       "password": "admin",
       "phone": "+551140028922",
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "userName": "fakhoury",
-      "address": "Rua do Fakhoury",
+      "address": "Rua do Fakhoury !!",
       "email": "andre@gmail.com",
       "password": "fakhoury",
       "phone": "+5514321456789",
@@ -231,8 +231,8 @@
       "author": "Author 18",
       "description": "Lorem ipsum 18",
       "category": "fantasy",
-      "qttStock": 2,
-      "qttSold": 19,
+      "qttStock": 0,
+      "qttSold": 21,
       "price": "18.99",
       "img": "book_cover.png"
     },
