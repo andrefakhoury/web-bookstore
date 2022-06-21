@@ -45,7 +45,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
         phone: phoneNumber
       };
 
-      onUpdate(user.id, updatedUser);
+      onUpdate(user.id, updatedUser, false);
       alert("Successfully updated!");
       navigate("/admin?list=users");
     } catch(e) {
