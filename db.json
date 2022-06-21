@@ -109,11 +109,32 @@
       "author": "Makoto Shinkai",
       "description": "Two teenagers share a profound, magical connection upon discovering they are swapping bodies. Things manage to become even more complicated when the boy and girl decide to meet in person.",
       "category": "comics",
-      "qttStock": 10,
-      "qttSold": 0,
-      "price": 20.9,
-      "img": "your-name.-01-Capa_p.jpg",
-      "id": 7
+      "qttStock": 2,
+      "qttSold": 11,
+      "price": "10.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 11,
+      "title": "Sample Book 11",
+      "author": "Author 11",
+      "description": "Lorem ipsum 11",
+      "category": "biography",
+      "qttStock": 16,
+      "qttSold": 12,
+      "price": "11.99",
+      "img": "book_cover.png"
+    },
+    {
+      "id": 12,
+      "title": "Sample Book 12",
+      "author": "Author 12",
+      "description": "Lorem ipsum 12",
+      "category": "biography",
+      "qttStock": 17,
+      "qttSold": 13,
+      "price": "12.99",
+      "img": "book_cover.png"
     },
     {
       "title": "Heartstopper",
@@ -164,11 +185,10 @@
       "author": "Rick Riordan",
       "description": "The Lightning Thief is a 2005 American-fantasy-adventure novel based on Greek mythology, the first young adult novel written by Rick Riordan in the Percy Jackson & the Olympians series. It won the Adult Library Services Association Best Books for Young Adults, among other awards.",
       "category": "fantasy",
-      "qttStock": 10,
-      "qttSold": 0,
-      "price": 15.59,
-      "img": "percy.jpeg",
-      "id": 12
+      "qttStock": 2,
+      "qttSold": 19,
+      "price": "18.99",
+      "img": "book_cover.png"
     },
     {
       "title": "Alan Turing: The Enigma",

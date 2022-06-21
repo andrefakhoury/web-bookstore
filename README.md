@@ -12,7 +12,7 @@ Bookstore made for Web Development classes at Universidade de Sao Paulo.
 
 - There must be 2 types of users: customers and admins.
   - Customers are users who access the system to buy books.
-  - Administrators are resposible for managing users and products. The default admin account is `admin` with password `admin`.
+  - Administrators are resposible for managing users and products. The default admin account is `admin@gmail.com` with password `admin`.
 - The admin record includes: name, id, phone, email.
 - Customer records include:  name, id, address, phone, email.
 - Product records include: book title, book author, book genre/category, id, photo (book cover), description, price, quantity in stock, quantity sold.

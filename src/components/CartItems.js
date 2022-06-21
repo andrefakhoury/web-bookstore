@@ -1,6 +1,6 @@
 import { clampString } from '../utils';
 
-const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart }) => {
+const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart, showQuantityButtons }) => {
   const images = require.context('../../public/images', true);
 
   return (
@@ -25,8 +25,12 @@ const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart }) =>
                   </td>
                   <td>
                     {cartArray[index][1]}
-                    <button className='qtd-control plus' onClick={() => addToCart(book.id, 1)}>+</button>
-                    <button className='qtd-control minus' onClick={() => removeFromCart(book.id, 1)}>-</button>
+                    {
+                      showQuantityButtons === true && <>
+                        <button className='qtd-control plus' onClick={() => addToCart(book.id, 1)}>+</button>
+                        <button className='qtd-control minus' onClick={() => removeFromCart(book.id, 1)}>-</button>
+                      </>
+                    }
                   </td>
                   <td>$ {(cartArray[index][1] * book.price).toFixed(2)}</td>
                 </tr>

@@ -144,6 +144,7 @@ function App() {
     return true;
   };
 
+  // Remove item from cart, updating cartItems and cartObjects
   const removeFromCart = async (bookId, qtt) => {
     const oldAmmount = cartItems[bookId];
     
@@ -159,6 +160,47 @@ function App() {
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
+
+  const onSubmitCheckout = async () => {
+    // Check if all items are available
+    const keys = Object.entries(cartItems);
+    for (let index in keys) {
+      let currentId = keys[index][0];
+      let currentQtt = keys[index][1];
+
+      const currentItem = await fetchBook(currentId);
+      if (currentQtt > currentItem.qttStock) {
+        return false;
+      }
+    }
+
+    // Update sold, qtt in stock
+    for (let index in keys) {
+      let currentId = keys[index][0];
+      let currentQtt = keys[index][1];
+
+      const newBook = await fetchBook(currentId);
+      newBook.qttSold += currentQtt;
+      newBook.qttStock -= currentQtt;
+      
+      await fetch(`http://localhost:5000/books/${currentId}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newBook)
+      });
+    }
+
+    // clear cart items
+    setCartItems({});
+    setCartObjects([]);
+    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify({}));
+    return true;
+  }
+
+  const onLogOut = () => {
+    setLoggedUser({});
+    window.localStorage.setItem("LOGGED_USER_INFO", JSON.stringify({}));
+  }
   
   return (
     <Router>
@@ -171,17 +213,54 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems} cartObjects={cartObjects} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
 
-            {/* If logged in, goes to user page. Otherwise, goes to login */}
-            <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
-            
-            <Route path='/users/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
-            <Route path='/books/create' element={<CreateBook loggedUser={loggedUser} onAdd={createBook}/>}/>
-            <Route path='/books/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
-            <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
-            <Route path='/login' element={<Login logUser={logUser}/>}/>
-            <Route path='/admin' element={<AdminPage loggedUser={loggedUser}/>}/>
+            {/* If logged in, goes to desired page. Otherwise, goes to login */}
+            {
+              <Route path='/user' element={
+                loggedUser.id ?
+                  <UserProfile user={loggedUser} onUpdate={updateProfile} onLogOut={onLogOut}/>
+                : <Login logUser={logUser}/>
+              }/>
+            }
+            {
+              <Route path='/checkout' element={
+                loggedUser.id ?
+                  <Checkout cartItems={cartItems} cartObjects={cartObjects} onSubmitCheckout={onSubmitCheckout}/>
+                : <Login logUser={logUser}/>
+              }/>
+            }
+            {
+              <Route path='/signup' element={
+                loggedUser.id ?
+                  <SignUp onAdd={createProfile}/>
+                : <Login logUser={logUser}/>
+              }/>
+            }
+            {
+              <Route path='/login' element={
+                loggedUser.id ?
+                  <UserProfile user={loggedUser} onUpdate={updateProfile}/>
+                : <Login logUser={logUser}/>
+              }/>
+            }
+
+            {/* Admin-only */}
+            {
+              loggedUser.admin === true &&
+                <Route path='/users/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
+            }
+            {
+              loggedUser.admin === true &&
+                <Route path='/books/create' element={<CreateBook loggedUser={loggedUser} onAdd={createBook}/>}/>
+            }
+            {
+              loggedUser.admin === true &&
+                <Route path='/books/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
+            }
+            {
+              loggedUser.admin === true &&
+                <Route path='/admin' element={<AdminPage loggedUser={loggedUser}/>}/>
+            }            
           </Routes>
         </div>
       <Footer/>

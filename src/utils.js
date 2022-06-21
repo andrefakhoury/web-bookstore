@@ -6,7 +6,7 @@ export function verifyPassword(password, errorMessage) {
 
 // Checks whether given email is valid (email@domain.com|edu|br)
 export function verifyEmail(email, errorMessage) {
-  let regex = new RegExp("\\b[a-z0-9]+@[a-z]+\.(?:[A-Z]{2}|com|edu|br)\\b");
+  let regex = new RegExp("\\b[a-z0-9]+@[a-z]+.(?:[A-Z]{2}|com|edu|br)\\b");
   if(!regex.test(email))
     throw errorMessage;
 }
@@ -23,6 +23,20 @@ export function verifyEqual(val1, val2, errorMessage) {
     throw errorMessage;
 }
 
+// Verify if val is a number of 'digits' ammounts of digits, throws message if not
+export function verifyNumber(val, digits, errorMessage) {
+  let regex = new RegExp(`\\b\\d{${digits}}\\b`);
+  if(!regex.test(val))
+    throw errorMessage;
+}
+
+// Verify a date without year in the form DD/MM. throws error if not
+export function verifyDateWithoutYear(val, errorMessage) {
+  let regex = new RegExp(`\\b\\d{2}/\\d{2}\\b`);
+  if(!regex.test(val))
+    throw errorMessage;
+}
+
 // Clamp a string to a given size
 export function clampString(str, maxSize) {
   if (maxSize + 3 > str.length) {
@@ -34,14 +48,31 @@ export function clampString(str, maxSize) {
 
 // Return an array of 'size' related books samples from arr to book
 export async function getRelatedBooks(book, arr, size) {
-  let shuffled = arr.slice(0), i = arr.length, min = i - size, temp, index;
-  while (i-- > min) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
+  let bookScores = [];
+
+  // assign scores to each books
+  for (let curIndex in arr) {
+    const curBook = arr[curIndex];
+    // ignores given book
+    if (curBook.id === book.id) {
+      continue;
+    }
+    let categories = Object.entries(curBook);
+    let score = categories.reduce((pv, cv) => ( pv + (book[cv[0]] === cv[1] ? 1 : 0)), 0 ).toFixed(2);
+    
+    let curScores = [score, curIndex];
+
+    bookScores.push(curScores);
   }
-  return shuffled.slice(min);
+
+  // sort from largest to smallest
+  bookScores.sort((a, b) => {
+    return b[0] - a[0];
+  });
+
+  // choose first size elements
+  const chosen = bookScores.slice(0, Math.min(size, bookScores.length));
+  return chosen.map((el) => arr[el[1]]);
 }
 
 // Fetch from database
