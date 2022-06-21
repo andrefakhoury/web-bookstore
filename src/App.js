@@ -90,7 +90,8 @@ function App() {
       author: newBook.author,
       description: newBook.description,
       category: newBook.category,
-      price: newBook.price
+      price: newBook.price,
+      img: newBook.img
     };
     const res = await fetch(`http://localhost:5000/books/${id}`, {
       method: 'PUT',
@@ -108,6 +109,15 @@ function App() {
     });
     const data = await res.json();
     logUser(data.id);
+  }
+
+  const createBook = async (newBook) => {
+    const res = await fetch(`http://localhost:5000/books/`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newBook)
+    });
+    const data = await res.json();
   }
 
   // Add to cart (if in stock) and saves to local storage
