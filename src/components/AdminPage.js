@@ -11,8 +11,8 @@ const AdminPage = ({loggedUser}) => {
   const list = searchParams.get('list')
 
   useEffect(() => {
-    // if (!loggedUser || !loggedUser.admin)
-    //   navigate({pathname: "/"});
+    if (!loggedUser || !loggedUser.admin)
+      navigate({pathname: "/"});
 
     const getBooks = async () => {
       const books = await fetchBooks('all');
@@ -79,6 +79,10 @@ const AdminPage = ({loggedUser}) => {
               </tr>
             </thead>
             <tbody>
+                <tr>
+                  <td></td>
+                  <td>[+] Add new book</td>
+                  </tr>
               {
                 content.map((book) => (
                   <tr>
