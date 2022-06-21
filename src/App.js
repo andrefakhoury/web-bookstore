@@ -9,7 +9,7 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import UpdateUserProfile from "./components/UpdateUserProfile"
 import UpdateBookInfo from './components/UpdateBookInfo';
-import { fetchUser, fetchBook } from './utils';
+import { fetchUser, fetchBook, fetchBooksByIds } from './utils';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import AdminPage from './components/AdminPage';
@@ -18,12 +18,23 @@ import AdminPage from './components/AdminPage';
 function App() {
   const [loggedUser, setLoggedUser] = useState({});
   const [cartItems, setCartItems] = useState(new Map());
+  const [cartObjects, setCartObjects] = useState([]);
 
   // Get cart items from local storage on startup
   useEffect(() => {
     const data = window.localStorage.getItem("LOCAL_CART_ITEMS");
     let dataInfo = JSON.parse(data) ?? new Map();
     setCartItems(dataInfo);
+
+    async function getCartObjects(ids) {
+      const booksFromServer = await fetchBooksByIds(ids);
+      setCartObjects(booksFromServer);
+    }
+
+    const cartArray = Object.entries(dataInfo);
+    const ids = Array.from( cartArray.map((bookInfo) => (bookInfo[0])));
+    console.log(ids);
+    getCartObjects(ids);
   }, []);
 
   // Get logged user from storage, if any
@@ -39,6 +50,15 @@ function App() {
     }
   }, []);
 
+  // Fetch db to load all objects of cart items
+  async function updateCartObjects() {
+    const cartArray = Object.entries(cartItems);
+    const ids = Array.from( cartArray.map((bookInfo) => (bookInfo[0])));
+    const booksFromServer = await fetchBooksByIds(ids);
+    setCartObjects(booksFromServer);
+  }
+
+  // Log an user, saving local state and storage
   const logUser = ((user) => {
     setLoggedUser(user);
     const userId = { id: user.id };
@@ -106,21 +126,23 @@ function App() {
 
     cartItems[bookId] = newAmmount;
     setCartItems(cartItems);
+    await updateCartObjects();
 
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
     return true;
   };
 
-  const removeFromCart = (bookId, qtt) => {
+  const removeFromCart = async (bookId, qtt) => {
     let oldAmmount = cartItems[bookId];
-    if (oldAmmount == qtt){
+    if (oldAmmount === qtt){
       delete cartItems[bookId]
     }
     else if (oldAmmount > qtt){
       cartItems[bookId] -= qtt
     }
     setCartItems(cartItems);
+    await updateCartObjects();
 
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
@@ -136,7 +158,7 @@ function App() {
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
-            <Route path='/cart' element={<Cart cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
+            <Route path='/cart' element={<Cart cartItems={cartItems} cartObjects={cartObjects} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
             <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
 
             {/* If logged in, goes to user page. Otherwise, goes to login */}
