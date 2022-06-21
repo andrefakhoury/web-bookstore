@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import CartItems from "./CartItems"
 
-const Cart = ({cartItems}) => {
+const Cart = ({cartItems, addToCart, removeFromCart}) => {
   let navigate = useNavigate();
   // const [books, setBooks] = useState([])
   // useEffect(() => {
@@ -19,6 +19,7 @@ const Cart = ({cartItems}) => {
   useEffect(() => {
     const getBooks = async () => {
       const ids = Array.from( cartArray.map((bookInfo) => (bookInfo[0])));
+      console.log("ids", ids)
       const booksFromServer = await fetchBooksByIds(ids);
       setBooks(booksFromServer)
     }
@@ -32,7 +33,7 @@ const Cart = ({cartItems}) => {
     <div>
       <h2 className="cart-title">Cart</h2>
       <div className="cart">
-            <CartItems books={books} cartArray={cartArray}/>
+            <CartItems books={books} cartArray={cartArray} setBooks={setBooks} addToCart={addToCart} removeFromCart={removeFromCart}/>
             <p>FINAL PRICE: $ {books.reduce((pv, v, index) => (pv + v.price*cartArray[index][1]), 0).toFixed(2)}</p>
             <button className="btn" onClick={() => navigate({pathname: "/checkout"})}>Proceed to Checkout</button>
       </div>

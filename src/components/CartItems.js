@@ -1,6 +1,6 @@
 import { clampString } from '../utils';
 
-const CartItems = ({ books, cartArray }) => {
+const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart }) => {
   const images = require.context('../../public/images', true);
 
   return (
@@ -23,7 +23,11 @@ const CartItems = ({ books, cartArray }) => {
                     </div>
                     <p className='cart-item'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
                   </td>
-                  <td>{cartArray[index][1]}</td>
+                  <td>
+                    {cartArray[index][1]}
+                    <button className='qtd-control plus' onClick={() => addToCart(book.id, 1)}>+</button>
+                    <button className='qtd-control minus' onClick={() => removeFromCart(book.id, 1)}>-</button>
+                  </td>
                   <td>$ {(cartArray[index][1] * book.price).toFixed(2)}</td>
                 </tr>
                 

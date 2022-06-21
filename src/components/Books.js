@@ -1,6 +1,6 @@
 import BookCard from "./BookCard"
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { fetchBooks } from "../utils"
 
 const Books = () => {

@@ -141,6 +141,31 @@ div.cart button{
   color: white;
 }
 
+
+div.cart button.qtd-control {
+  background-color: green;
+  width: 30%;
+  font-size: 25px;
+  color: black;
+  display: inline-block;
+  /* border: 0;
+  margin: 0;
+  padding: 0; */
+}
+/*
+div.cart button.plus {
+  float: left;
+  vertical-align: top;
+}
+div.cart button.plus {
+  float: bottom
+}
+
+div.cart p.qtd {
+  margin-right: 2%;
+  width: 5%
+} */
+
 h2.cart-title{
   margin: 20px
 }

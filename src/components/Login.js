@@ -33,6 +33,7 @@ const Login = ({ logUser }) => {
 
         alert("Successfully logged in!");
         logUser(user[0])
+        window.localStorage.setItem("LOGGED_USER", JSON.stringify(user[0]));
         navigate("/");
     } catch(e) {
       alert(e);

@@ -51,6 +51,22 @@ export async function fetchBook(id){
   return data;
 }
 
+// Fetch from database
+export async function reduceBookStock(id, qtt){
+  const res = await fetch(`http://localhost:5000/books/${id}`);
+  let data = await res.json();
+  
+  console.log("data", data)
+  data.qttSold += qtt
+  data.qttStock -= qtt
+  await fetch(`http://localhost:5000/books/${id}`, {
+    method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+  });
+}
+
+// Fetch from database
 export async function fetchBooksByIds(ids) {
   let data = [];
   for (var i = 0; i < ids.length; i++) {

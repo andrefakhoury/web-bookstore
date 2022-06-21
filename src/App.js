@@ -9,7 +9,7 @@ import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import UpdateUserProfile from "./components/UpdateUserProfile"
 import UpdateBookInfo from './components/UpdateBookInfo';
-import { fetchUser, fetchBook } from './utils';
+import { fetchUser, fetchBook, reduceBookStock } from './utils';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 
@@ -58,7 +58,7 @@ function App() {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(updatedBook)
     });
-    const data = await res.json();
+    await res.json();
   }
 
     
@@ -70,9 +70,11 @@ function App() {
     });
     const data = await res.json();
     setLoggedUser(data);
+    window.localStorage.setItem("LOGGED_USER", JSON.stringify(data));
   }
 
   const addToCart = (bookId, qtt) => {
+    console.log("BookId", bookId)
     let oldAmmount = cartItems[bookId];
     if (!oldAmmount) oldAmmount = 0;
     cartItems[bookId] = oldAmmount + qtt;
@@ -82,11 +84,26 @@ function App() {
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
 
-  const clearCart = () =>{
-    setCartItems([])
+  const removeFromCart = (bookId, qtt) => {
+    let oldAmmount = cartItems[bookId];
+    if (oldAmmount == qtt){
+      delete cartItems[bookId]
+    }
+    else if (oldAmmount > qtt){
+      cartItems[bookId] -= qtt
+    }
+    setCartItems(cartItems);
+
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
-  }
+  };
+
+  // const onCheckout = () =>{
+  //   Object.entries(cartItems).map((bookInfo) => reduceBookStock(bookInfo[0], bookInfo[1]))
+    // setCartItems([])
+  //   // Clear cart items from local storage
+    // window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
+  // }
   
   return (
     <Router>
@@ -98,8 +115,8 @@ function App() {
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
-            <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems} onCheckout={clearCart}/>}/>
+            <Route path='/cart' element={<Cart cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/user/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
