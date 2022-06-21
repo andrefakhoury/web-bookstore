@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { fetchUserbyEmail, verifyPassword, verifyEmail, verifyEqual, verifyUser } from "../utils"
+import { fetchUserbyEmail, verifyPassword, verifyEmail, verifyEqual, verifyNotEmpty } from "../utils"
 import FormField from "./FormField"
 
 const Login = ({ logUser }) => {
@@ -27,12 +27,11 @@ const Login = ({ logUser }) => {
         
         verifyPassword(Password, "Invalid password given.");
 
-        verifyUser(user, "There's no user with the given email, check for typos or sign up!")
-        // TODO remove the need for indexing
+        verifyNotEmpty(user, "There's no user with the given email, check for typos or sign up!")
         verifyEqual(user[0].password, Password, "Wrong Password")
 
         alert("Successfully logged in!");
-        logUser(user[0])
+        logUser(user[0]);
         navigate("/");
     } catch(e) {
       alert(e);

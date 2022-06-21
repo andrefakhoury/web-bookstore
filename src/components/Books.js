@@ -1,6 +1,6 @@
 import BookCard from "./BookCard"
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { fetchBooks } from "../utils"
 
 const Books = () => {
@@ -30,7 +30,7 @@ const Books = () => {
       setBooks(booksFromServer)
     }
     getBooks()
-  }, [genre, navigate, mapGenre])
+  }, [genre, navigate, setSearchParams, mapGenre])
 
   return (
     <div className="center">

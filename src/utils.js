@@ -11,9 +11,9 @@ export function verifyEmail(email, errorMessage) {
     throw errorMessage;
 }
 
-// Checks whether given email is valid (email@domain.com|edu|br)
-export function verifyUser(user, errorMessage) {
-  if(user.length == 0)
+// Checks whether given array is not empty
+export function verifyNotEmpty(arr, errorMessage) {
+  if(arr.length === 0)
     throw errorMessage;
 }
 

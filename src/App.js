@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import { useState, useEffect, useNavigate } from 'react'
+import { useState, useEffect } from 'react'
 import Book from "./components/Book";
 import Books from "./components/Books";
 import Footer from "./components/Footer";
@@ -25,6 +25,25 @@ function App() {
     let dataInfo = JSON.parse(data) ?? new Map();
     setCartItems(dataInfo);
   }, []);
+
+  // Get logged user from storage, if any
+  useEffect(() => {
+    async function getUser(userId) {
+      const data = await fetchUser(userId);
+      setLoggedUser(data);      
+    }
+    const data = window.localStorage.getItem("LOGGED_USER_INFO");
+    let dataInfo = JSON.parse(data) ?? new Map();
+    if (!isNaN(dataInfo.id)) {
+      getUser(dataInfo.id);
+    }
+  }, []);
+
+  const logUser = ((user) => {
+    setLoggedUser(user);
+    const userId = { id: user.id };
+    window.localStorage.setItem("LOGGED_USER_INFO", JSON.stringify(userId));
+  });
 
   const updateProfile = async (id, newUser) => {
     const oldUser = await fetchUser(id);
@@ -61,7 +80,6 @@ function App() {
     });
     const data = await res.json();
   }
-
     
   const createProfile = async (newUser) => {
     const res = await fetch(`http://localhost:5000/users/`, {
@@ -70,24 +88,43 @@ function App() {
       body: JSON.stringify(newUser)
     });
     const data = await res.json();
-    setLoggedUser(data);
+    logUser(data.id);
   }
 
-  const addToCart = (bookId, qtt) => {
+  // Add to cart (if in stock) and saves to local storage
+  const addToCart = async (bookId, qtt) => {
     let oldAmmount = cartItems[bookId];
     if (!oldAmmount) oldAmmount = 0;
-    cartItems[bookId] = oldAmmount + qtt;
+    const newAmmount = oldAmmount + qtt;
+    
+    // check if is available
+    const book = await fetchBook(bookId);
+    if (!book.qttStock || newAmmount > book.qttStock) {
+      alert("Oops, this book is not available in the desired ammount");
+      return false;
+    }
+
+    cartItems[bookId] = newAmmount;
+    setCartItems(cartItems);
+
+    // Save cart items from local storage
+    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
+    return true;
+  };
+
+  const removeFromCart = (bookId, qtt) => {
+    let oldAmmount = cartItems[bookId];
+    if (oldAmmount == qtt){
+      delete cartItems[bookId]
+    }
+    else if (oldAmmount > qtt){
+      cartItems[bookId] -= qtt
+    }
     setCartItems(cartItems);
 
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
-
-  const clearCart = () =>{
-    setCartItems([])
-    // Save cart items from local storage
-    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
-  }
   
   return (
     <Router>
@@ -99,14 +136,16 @@ function App() {
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
-            <Route path='/cart' element={<Cart cartItems={cartItems}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems} onCheckout={clearCart}/>}/>
+            <Route path='/cart' element={<Cart cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
+
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
+            
             <Route path='/users/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
             <Route path='/books/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
-            <Route path='/login' element={<Login logUser={setLoggedUser}/>}/>
+            <Route path='/login' element={<Login logUser={logUser}/>}/>
             <Route path='/admin' element={<AdminPage loggedUser={loggedUser}/>}/>
           </Routes>
         </div>

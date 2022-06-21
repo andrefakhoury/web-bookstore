@@ -47,7 +47,7 @@ const AdminPage = ({loggedUser}) => {
             <tbody>
               {
                 content.map((user) => (
-                  <tr>
+                  <tr key={user.id}>
                     <td>{user.id}</td>
                     <td><Link to={{pathname: "/users/update", search:`id=${user.id}`}}>{user.userName}</Link></td>
                     <td>{user.email}</td>

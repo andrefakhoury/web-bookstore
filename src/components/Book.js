@@ -9,6 +9,7 @@ const Book = ({onAddToCart}) => {
   const [relatedBooks, setRelatedBooks] = useState([]);
   const bookId = useLocation().search.substring(1);
 
+  // Effect to fetch book by ID and related books
   useEffect(() => {
     const getBook = async () => {
       // fetch current book
@@ -25,12 +26,15 @@ const Book = ({onAddToCart}) => {
     getBook()
   }, [bookId, navigate])
 
-  const onClick = (e) => {
-    onAddToCart(bookId, 1);
-    alert("Successfully added!");
-    navigate("/cart");
+  // "Add to Cart" button on click
+  const onClick = async (e) => {
+    if (await onAddToCart(bookId, 1)) {
+      alert("Successfully added!");
+      navigate("/cart");
+    }
   }
 
+  // Load cover
   const images = require.context('../../public/images', true);
   let imageSource = images("./book_cover.png");
   try {
@@ -44,6 +48,7 @@ const Book = ({onAddToCart}) => {
       {/* Book details */}
       <div className="container-fluid">
         <div className="row">
+        {/* Book cover and price */}
         <div className="col-md-auto">
             <div className="card" style={{width: "18rem", borderWidth: "0"}}>
               <img alt="Book cover" className="card-img-top" src={imageSource}/>
@@ -52,13 +57,14 @@ const Book = ({onAddToCart}) => {
               </div>
             </div>
           </div>
+          {/* Book details */}
           <div className="col-md-auto">
             <div className="book-info" style={{width: "18rem"}}>
               <h2>{book.author}</h2>
               <h3>{book.category}</h3>
               <p>{book.description}</p>
               <button type="button"
-                style={{position: "absolute",width: "100%"}} className="btn btn-primary btn-lg"
+                style={{width: "100%"}} className="btn btn-primary btn-lg"
                 onClick={onClick}
               >Add to cart</button>
             </div>

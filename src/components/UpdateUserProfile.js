@@ -8,7 +8,6 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
   
   const [searchParams, setSearchParams] = useSearchParams();
   const userId = searchParams.get('id')
-  console.log(loggedUser)
   
   // States for each field
   const [user, setUser] = useState({})
