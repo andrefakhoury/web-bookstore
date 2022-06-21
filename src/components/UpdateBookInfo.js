@@ -11,15 +11,16 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
   
   // States for each field
   const [book, setBook] = useState({})
-  const [title, setTitle] = useState();
-  const [author, setAuthor] = useState();
-  const [description, setDescription] = useState();
-  const [category, setCategory] = useState();
-  const [price, setPrice] = useState();
+  const [title, setTitle] = useState("Default");
+  const [author, setAuthor] = useState("Default");
+  const [description, setDescription] = useState("Default");
+  const [category, setCategory] = useState("Default");
+  const [price, setPrice] = useState("0.00");
+  const [coverImage, setCoverImage] = useState("book_cover.png");
 
   // Check if user is invalid
   useEffect(() => {
-    if (loggedUser.admin == false || !bookId)
+    if (!loggedUser || !loggedUser.admin || !bookId)
       navigate({pathname: "/home"}, {replace: true});
 
     const getBook = async () => {
@@ -29,7 +30,8 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
       setAuthor(book.author);
       setDescription(book.description);
       setCategory(book.category);
-      setPrice(book.price)
+      setPrice(book.price);
+      setCoverImage(book.img);
     } 
     getBook();
 
@@ -37,7 +39,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     // Verifies fields and update
     try {
       const updatedBook = {
@@ -45,7 +47,8 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         author: author,
         description: description,
         category: category,
-        price: price
+        price: price,
+        img: coverImage.replace(/^.*\\/, "")
       };
 
       onUpdate(book.id, updatedBook);
@@ -56,6 +59,8 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
     }
   }
 
+  console.log(coverImage)
+
   return (
     <div className="center">
       <h1>Update book information</h1>
@@ -65,6 +70,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         <FormField label="Category" value={category} isRequired={true} setText={setCategory}/>
         <FormField label="Description" value={description} isRequired={true} setText={setDescription}/>
         <FormField label="Price" value={price} isRequired={true} setText={setPrice}/>
+        <FormField type="file" setText={setCoverImage} />
         <input type="submit" value="Update information"/>
       </form>
     </div>
