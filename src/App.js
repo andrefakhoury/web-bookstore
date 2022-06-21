@@ -158,6 +158,42 @@ function App() {
     // Save cart items from local storage
     window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify(cartItems));
   };
+
+  const onSubmitCheckout = async () => {
+    // Check if all items are available
+    const keys = Object.entries(cartItems);
+    for (let index in keys) {
+      let currentId = keys[index][0];
+      let currentQtt = keys[index][1];
+
+      const currentItem = await fetchBook(currentId);
+      if (currentQtt > currentItem.qttStock) {
+        return false;
+      }
+    }
+
+    // Update sold, qtt in stock
+    for (let index in keys) {
+      let currentId = keys[index][0];
+      let currentQtt = keys[index][1];
+
+      const newBook = await fetchBook(currentId);
+      newBook.qttSold += currentQtt;
+      newBook.qttStock -= currentQtt;
+      
+      await fetch(`http://localhost:5000/books/${currentId}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newBook)
+      });
+    }
+
+    // clear cart items
+    setCartItems({});
+    setCartObjects([]);
+    window.localStorage.setItem("LOCAL_CART_ITEMS", JSON.stringify({}));
+    return true;
+  }
   
   return (
     <Router>
@@ -170,7 +206,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems} cartObjects={cartObjects} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems} cartObjects={cartObjects}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems} cartObjects={cartObjects} onSubmitCheckout={onSubmitCheckout}/>}/>
 
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>

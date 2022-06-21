@@ -6,7 +6,7 @@ export function verifyPassword(password, errorMessage) {
 
 // Checks whether given email is valid (email@domain.com|edu|br)
 export function verifyEmail(email, errorMessage) {
-  let regex = new RegExp("\\b[a-z0-9]+@[a-z]+\.(?:[A-Z]{2}|com|edu|br)\\b");
+  let regex = new RegExp("\\b[a-z0-9]+@[a-z]+.(?:[A-Z]{2}|com|edu|br)\\b");
   if(!regex.test(email))
     throw errorMessage;
 }
@@ -20,6 +20,20 @@ export function verifyNotEmpty(arr, errorMessage) {
 // Verify if two objects are equal, throw message if not
 export function verifyEqual(val1, val2, errorMessage) {
   if (val1 !== val2)
+    throw errorMessage;
+}
+
+// Verify if val is a number of 'digits' ammounts of digits, throws message if not
+export function verifyNumber(val, digits, errorMessage) {
+  let regex = new RegExp(`\\b\\d{${digits}}\\b`);
+  if(!regex.test(val))
+    throw errorMessage;
+}
+
+// Verify a date without year in the form DD/MM. throws error if not
+export function verifyDateWithoutYear(val, errorMessage) {
+  let regex = new RegExp(`\\b\\d{2}/\\d{2}\\b`);
+  if(!regex.test(val))
     throw errorMessage;
 }
 

@@ -1,4 +1,3 @@
-import { fetchBooksByIds, clampString } from "../utils"
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import CartItems from "./CartItems"
