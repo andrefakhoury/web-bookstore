@@ -93,7 +93,7 @@ function App() {
     <Router>
       <div id="App">
         <div id="content-wrap">
-          <Header/>
+          <Header isAdmin={loggedUser.admin === true}/>
           <Routes>
             {/* Default path is /home?all */}
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
