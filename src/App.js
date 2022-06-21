@@ -213,6 +213,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems} cartObjects={cartObjects} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
+            <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
 
             {/* If logged in, goes to desired page. Otherwise, goes to login */}
             {
@@ -226,13 +227,6 @@ function App() {
               <Route path='/checkout' element={
                 loggedUser.id ?
                   <Checkout cartItems={cartItems} cartObjects={cartObjects} onSubmitCheckout={onSubmitCheckout}/>
-                : <Login logUser={logUser}/>
-              }/>
-            }
-            {
-              <Route path='/signup' element={
-                loggedUser.id ?
-                  <SignUp onAdd={createProfile}/>
                 : <Login logUser={logUser}/>
               }/>
             }

@@ -46,7 +46,7 @@ const Login = ({ logUser }) => {
             <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
             <FormField label="Password" type="password" isRequired={true} setText={setPassword}/>
             <input type="submit" value="Login"/>
-            <p>Don't have an account? <Link to="/login">Sign Up</Link> now!</p>
+            <p>Don't have an account? <Link to="/signup">Sign Up</Link> now!</p>
         </form>
     </div>
   )

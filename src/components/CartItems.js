@@ -24,7 +24,7 @@ const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart, show
                     <p className='cart-item'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
                   </td>
                   <td>
-                    {cartArray[index][1]}
+                    {cartArray[index][1]}{'\t'}
                     {
                       showQuantityButtons === true && <>
                         <button className='qtd-control plus' onClick={() => addToCart(book.id, 1)}>+</button>
