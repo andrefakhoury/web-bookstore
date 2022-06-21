@@ -48,7 +48,7 @@ const CreateBook = ({loggedUser, onAdd}) => {
 
   return (
     <div className="center">
-      <h1>Update book information</h1>
+      <h1>Create new book</h1>
       <form onSubmit={onSubmit}>
         <FormField label="Title" value={title} isRequired={true} setText={setTitle}/>
         <FormField label="Author" value={author} isRequired={true} setText={setAuthor}/>
@@ -57,7 +57,7 @@ const CreateBook = ({loggedUser, onAdd}) => {
         <FormField label="Price" type="number" value={price} isRequired={true} setText={setPrice}/>
         <FormField label="Stock" type="number" value={stock} isRequired={true} setText={setStock}/>
         <FormField type="file" setText={setCoverImage} />
-        <input type="submit" value="Update information"/>
+        <input type="submit" value="Create book"/>
       </form>
     </div>
   )

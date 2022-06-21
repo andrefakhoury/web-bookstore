@@ -75,7 +75,7 @@ function App() {
     logUser(data.id);
   }
 
-  const updateProfile = async (id, newUser) => {
+  const updateProfile = async (id, newUser, updateLoggedUser=true) => {
     const oldUser = await fetchUser(id);
     const updatedUser = {
       ...oldUser,
@@ -90,7 +90,8 @@ function App() {
       body: JSON.stringify(updatedUser)
     });
     const data = await res.json();
-    setLoggedUser(data);
+    if (updateLoggedUser)
+      setLoggedUser(data);
   }
 
   const createBook = async (newBook) => {
