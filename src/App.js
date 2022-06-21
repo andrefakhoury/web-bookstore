@@ -12,6 +12,7 @@ import UpdateBookInfo from './components/UpdateBookInfo';
 import { fetchUser, fetchBook } from './utils';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import AdminPage from './components/AdminPage';
 
 
 function App() {
@@ -92,7 +93,7 @@ function App() {
     <Router>
       <div id="App">
         <div id="content-wrap">
-          <Header/>
+          <Header isAdmin={loggedUser.admin === true}/>
           <Routes>
             {/* Default path is /home?all */}
             <Route path="/" element={<Navigate to={{pathname: "/home", search: "genre=all"}}/>}/>
@@ -102,11 +103,11 @@ function App() {
             <Route path='/checkout' element={<Checkout cartItems={cartItems} onCheckout={clearCart}/>}/>
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
-            <Route path='/user/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
-            <Route path='/book/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
+            <Route path='/users/update' element={<UpdateUserProfile loggedUser={loggedUser} onUpdate={updateProfile}/>}/>
+            <Route path='/books/update' element={<UpdateBookInfo loggedUser={loggedUser} onUpdate={updateBook}/>}/>
             <Route path='/signup' element={<SignUp onAdd={createProfile}/>}/>
             <Route path='/login' element={<Login logUser={setLoggedUser}/>}/>
-
+            <Route path='/admin' element={<AdminPage loggedUser={loggedUser}/>}/>
           </Routes>
         </div>
       <Footer/>

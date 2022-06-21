@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FaCartArrowDown, FaUser } from 'react-icons/fa'
 
-const Header = () => {
+const Header = ({isAdmin}) => {
   const images = require.context('../../public/images', true);
 
   return (
@@ -30,6 +30,8 @@ const Header = () => {
         </ul>
         {/* Cart and User icons */}
         <ul className="navbar-nav mr-right">
+          {isAdmin && <li className="nav-item"><Link className="nav-link" to={{pathname: "/admin", search:"list=users"}}>Manage users</Link></li>}
+          {isAdmin && <li className="nav-item"><Link className="nav-link" to={{pathname: "/admin", search:"list=books"}}>Manage books</Link></li>}
           <li className="nav-item"><Link className="nav-link" to="/cart"><FaCartArrowDown className="color-change" size={20}/></Link></li>
           <li className="nav-item"><Link className="nav-link" to="/user"><FaUser className="color-change" size={20}/></Link></li>
         </ul>
