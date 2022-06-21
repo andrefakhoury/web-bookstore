@@ -20,7 +20,10 @@ const Cart = ({cartItems, cartObjects, addToCart, removeFromCart}) => {
         {
           books.length > 0 ?
           <>
-            <CartItems books={books} cartArray={cartArray} setBooks={setBooks} addToCart={addToCart} removeFromCart={removeFromCart}/>
+            <CartItems
+              books={books} cartArray={cartArray} setBooks={setBooks} addToCart={addToCart} removeFromCart={removeFromCart}
+              showQuantityButtons={true}
+            />
             <p>FINAL PRICE: $ {
               books.reduce((pv, v, index) => (
                 pv + (cartArray[index] ? v.price*cartArray[index][1] : 0)), 0

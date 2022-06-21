@@ -1,33 +1,36 @@
-import { fetchBooksByIds } from "../utils"
+import { fetchBooksByIds, verifyNotEmpty } from "../utils"
 import FormField from "./FormField"
 import { useState, useEffect } from 'react'
 import CartItems from "./CartItems"
 import { useNavigate } from 'react-router-dom'
 
 
-const Checkout = ({cartItems}) => {
+const Checkout = ({cartItems, cartObjects}) => {
     let navigate = useNavigate();
 
     const cartArray = Object.entries(cartItems)
-    const [books, setBooks] = useState([])
+    const [books, setBooks] = useState([]);
+
     useEffect(() => {
-        const getBooks = async () => {
-        const ids = Array.from( cartArray.map((bookInfo) => (bookInfo[0])));
-        const booksFromServer = await fetchBooksByIds(ids);
-        setBooks(booksFromServer)
-        }
-        getBooks()
-    }, [cartArray])
+      setBooks(cartObjects);
+    }, [cartObjects]);
+
     // States for each field
     const [creditCard, setCreditCard] = useState("");
     const [exp, setExp] = useState("");
     const [cvc, setCVC] = useState("");
     const [holderName, setHolderName] = useState("");
 
-    const onSubmit = () =>{
-        alert("Compra bem sucedida! Espero que esse não seja o seu cartão de verdade")
-        // onCheckout(cartItems)
-        navigate("/")
+    const onSubmit = (e) => {
+      e.preventDefault();
+      
+      try {
+        // verifyNotEmpty(user, "There's no user with the given email, check for typos or sign up!")
+        alert("Your order has been confirmed! I hope this is not your real credit card information...");  
+        navigate("/");
+      } catch(e) {
+        alert(e);
+      }
     }
 
     return (

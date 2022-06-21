@@ -132,6 +132,7 @@ function App() {
     return true;
   };
 
+  // Remove item from cart, updating cartItems and cartObjects
   const removeFromCart = async (bookId, qtt) => {
     const oldAmmount = cartItems[bookId];
     
@@ -159,7 +160,7 @@ function App() {
             <Route path='/home' element={<Books/>}/>
             <Route path='/book' element={<Book onAddToCart={addToCart}/>}/>
             <Route path='/cart' element={<Cart cartItems={cartItems} cartObjects={cartObjects} addToCart={addToCart} removeFromCart={removeFromCart}/>}/>
-            <Route path='/checkout' element={<Checkout cartItems={cartItems}/>}/>
+            <Route path='/checkout' element={<Checkout cartItems={cartItems} cartObjects={cartObjects}/>}/>
 
             {/* If logged in, goes to user page. Otherwise, goes to login */}
             <Route path='/user' element={<UserProfile user={loggedUser} onUpdate={updateProfile}/>}/>
