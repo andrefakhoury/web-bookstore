@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { verifyPassword, verifyEmail, verifyEqual } from "../utils"
 import FormField from "./FormField"
 
@@ -13,7 +14,7 @@ const SignUp = ({ onAdd }) => {
   const [Password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     
     // Verifies fields and adds new user
@@ -35,26 +36,41 @@ const SignUp = ({ onAdd }) => {
         };
 
         onAdd(newUser);
-        alert("Successfully signed up!");
+        await Swal.fire({
+          title: 'Successfully signed up!',
+          html: `Welcome, <b>${userName}</b>!`,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          icon: 'success'
+        });
         navigate("/");
     } catch(e) {
-      alert(e);
+      await Swal.fire({
+        title: 'Oops...',
+        text: e,
+        icon: 'error'
+      });
     }
   }
 
   return (
     <div className="center">
       <h1>Sign Up</h1>
+      <div className="container text-center">
         <form onSubmit={onSubmit}>
-            <FormField label="Full Name" value={userName} isRequired={true} setText={setUserName}/>
-            <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
-            <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
-            <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>
-            <FormField label="Password" type="password" isRequired={true} setText={setPassword}/>
-            <FormField label="Confirm password" type="password" isRequired={true} setText={setConfirmPassword}/>
-            <input type="submit" value="Sign Up"/>
+          <FormField label="Full Name" value={userName} isRequired={true} setText={setUserName}/>
+          <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
+          <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
+          <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>
+          <FormField label="Password" type="password" isRequired={true} setText={setPassword}/>
+          <FormField label="Confirm password" type="password" isRequired={true} setText={setConfirmPassword}/>
+          <input type="submit" value="Sign Up"/>
+          <p>Already have an account? <Link to="/login">Login</Link> now!</p>
         </form>
-        <p>Already have an account? <Link to="/login">Login</Link> now!</p>
+      </div>
     </div>
   )
 }

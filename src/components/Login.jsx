@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { fetchUserbyEmail, verifyPassword, verifyEmail, verifyEqual, verifyNotEmpty } from "../utils"
 import FormField from "./FormField"
 
@@ -18,7 +19,7 @@ const Login = ({ logUser }) => {
     getUser()
   }, [email])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     
     // Verifies fields and adds new user
@@ -28,13 +29,26 @@ const Login = ({ logUser }) => {
         verifyPassword(Password, "Invalid password given.");
 
         verifyNotEmpty(user, "There's no user with the given email, check for typos or sign up!")
-        verifyEqual(user[0].password, Password, "Wrong Password")
+        verifyEqual(user[0].password, Password, "Wrong password.")
 
-        alert("Successfully logged in!");
+        await Swal.fire({
+          title: 'Successfully logged in!',
+          html: `Hello, <b>${user[0].userName}!</b>`,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          icon: 'success'
+        });
         logUser(user[0]);
         navigate("/");
     } catch(e) {
-      alert(e);
+      await Swal.fire({
+        title: 'Oops...',
+        text: e,
+        icon: 'error'
+      });
     }
     
   }

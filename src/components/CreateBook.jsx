@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { fetchBook } from "../utils"
 import FormField from "./FormField"
 
@@ -22,7 +23,7 @@ const CreateBook = ({loggedUser, onAdd}) => {
 
   }, [loggedUser, navigate])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     // Verifies fields and update
@@ -39,10 +40,24 @@ const CreateBook = ({loggedUser, onAdd}) => {
       };
 
       onAdd(newBook);
-      alert("Book successfully created!");
+      
+      await Swal.fire({
+        title: 'Book successfully created!',
+        html: `<b>${title}</b> is now available to sell.`,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        icon: 'success'
+      });
       navigate("/admin?list=books");
     } catch(e) {
-      alert(e);
+      await Swal.fire({
+        title: 'Oops...',
+        text: e,
+        icon: 'error'
+      });
     }
   }
 

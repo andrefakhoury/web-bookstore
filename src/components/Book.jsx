@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import Swal from 'sweetalert2';
 import { fetchBook, fetchBooks, getRelatedBooks } from "../utils";
 import BookCard from "./BookCard";
 
@@ -29,7 +30,16 @@ const Book = ({onAddToCart}) => {
   // "Add to Cart" button on click
   const onClick = async (e) => {
     if (await onAddToCart(bookId, 1)) {
-      alert("Successfully added!");
+      await Swal.fire({
+        title: 'Success!',
+        html: `<b>${book.title}</b> was successfully added to the cart!`,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        icon: 'success'
+      });
       navigate("/cart");
     }
   }

@@ -14,6 +14,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import AdminPage from './components/AdminPage';
 import CreateBook from './components/CreateBook';
+import Swal from 'sweetalert2'
 
 
 function App() {
@@ -72,7 +73,7 @@ function App() {
       body: JSON.stringify(newUser)
     });
     const data = await res.json();
-    logUser(data.id);
+    logUser(data);
   }
 
   const updateProfile = async (id, newUser, updateLoggedUser=true) => {
@@ -131,7 +132,11 @@ function App() {
     // check if is available
     const book = await fetchBook(bookId);
     if (!book.qttStock || newAmmount > book.qttStock) {
-      alert("Oops, this book is not available in the desired ammount");
+      await Swal.fire({
+        title: 'Oops...',
+        text: 'This book is not available in the desired ammount!',
+        icon: 'error'
+      });
       return false;
     }
 
@@ -233,7 +238,7 @@ function App() {
             {
               <Route path='/login' element={
                 loggedUser.id ?
-                  <UserProfile user={loggedUser} onUpdate={updateProfile}/>
+                  <UserProfile user={loggedUser} onUpdate={updateProfile} onLogOut={onLogOut}/>
                 : <Login logUser={logUser}/>
               }/>
             }

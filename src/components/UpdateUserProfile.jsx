@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { fetchUser } from "../utils"
 import FormField from "./FormField"
 
@@ -33,7 +34,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
 
   }, [loggedUser, navigate, userId])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     
     // Verifies fields and update
@@ -46,10 +47,25 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
       };
 
       onUpdate(user.id, updatedUser, false);
-      alert("Successfully updated!");
+      
+      await Swal.fire({
+        title: 'Successfully updated!',
+        html: `<b>${userName}</b> information was successfully updated!`,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        icon: 'success'
+      });
+
       navigate("/admin?list=users");
     } catch(e) {
-      alert(e);
+      await Swal.fire({
+        title: 'Oops...',
+        text: e,
+        icon: 'error'
+      });
     }
   }
 

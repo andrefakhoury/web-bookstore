@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { verifyPassword, verifyEmail, verifyEqual } from "../utils"
 import FormField from "./FormField"
 
@@ -21,13 +22,22 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
       navigate({pathname: "/login"}, {replace: true});
   }, [user, navigate])
 
-  const onClickLogout = (e) => {
+  const onClickLogout = async (e) => {
+    await Swal.fire({
+      title: 'Successfully logged out!',
+      html: `See you soon, <b>${user.userName}!</b>`,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      icon: 'success'
+    });
     onLogOut();
-    alert("Successfully logged out!");
     navigate('/');
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     
     // Verifies fields and update
@@ -53,10 +63,24 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
       };
 
       onUpdate(user.id, updatedUser);
-      alert("Successfully updated!");
+
+      await Swal.fire({
+        title: 'Successfully updated!',
+        html: `<b>${userName}</b> information was successfully updated!`,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        icon: 'success'
+      });
       navigate("/");
     } catch(e) {
-      alert(e);
+      await Swal.fire({
+        title: 'Oops...',
+        text: e,
+        icon: 'error'
+      });
     }
   }
 
