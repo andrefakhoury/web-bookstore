@@ -72,7 +72,7 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
         <FormField label="New password" type="password" setText={setNewPassword}/>
         <FormField label="Confirm new password" type="password" setText={setConfirmNewPassword}/>
         <input type="submit" value="Update information"/>
-        <button className="btn btn-lg" onClick={onClickLogout}>Log out...</button>
+        <button className="btn btn-lg" style={{width: "100%"}} onClick={onClickLogout}>Log out</button>
       </form>
     </div>
   )

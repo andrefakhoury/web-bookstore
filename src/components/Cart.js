@@ -13,8 +13,8 @@ const Cart = ({cartItems, cartObjects, addToCart, removeFromCart}) => {
   }, [cartObjects]);
 
   return (
-    <div>
-      <h2 className="cart-title">Cart</h2>
+    <div className="center">
+      <h1>Cart</h1>
       <div className="cart">
         {
           books.length > 0 ?
@@ -23,7 +23,7 @@ const Cart = ({cartItems, cartObjects, addToCart, removeFromCart}) => {
               books={books} cartArray={cartArray} setBooks={setBooks} addToCart={addToCart} removeFromCart={removeFromCart}
               showQuantityButtons={true}
             />
-            <p>FINAL PRICE: $ {
+            <p>FINAL PRICE: ${
               books.reduce((pv, v, index) => (
                 pv + (cartArray[index] ? v.price*cartArray[index][1] : 0)), 0
               ).toFixed(2)

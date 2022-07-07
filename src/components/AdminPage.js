@@ -33,8 +33,8 @@ const AdminPage = ({loggedUser}) => {
     return (
       <div className="center">
         <h1>Admin Page</h1>
-        <div>
-          <table className="table table-responsive m-0" style={{width: "100%"}}>
+        <div className="container">
+          <table className="table table-responsive m-0">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -64,8 +64,8 @@ const AdminPage = ({loggedUser}) => {
     return (
       <div className="center">
         <h1>Admin Page</h1>
-        <div>
-          <table className="table table-responsive m-0" style={{width: "100%"}}>
+        <div className="container">
+          <table className="table table-responsive m-0">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -85,7 +85,7 @@ const AdminPage = ({loggedUser}) => {
               {
                 content.map((book) => (
                   <tr key={book.id}>
-                    <td>{book.id}</td>
+                    <th scope="row">{book.id}</th>
                     <td><Link to={{pathname: "/books/update", search:`id=${book.id}`}}>{book.title}</Link></td>
                     <td>{book.author}</td>
                     <td>{book.category}</td>

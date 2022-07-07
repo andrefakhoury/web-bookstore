@@ -8,6 +8,8 @@ const Books = () => {
   const [books, setBooks] = useState([])
   const [searchParams, setSearchParams] = useSearchParams();
   const genre = searchParams.get('genre')
+
+  // Map given genre -> Title to show
   const mapGenre = useRef({
     "": "Trending now",
     "all": "Trending now",
@@ -19,6 +21,7 @@ const Books = () => {
     "romance": "Romance"
   })
 
+  // Get current genre and load books accordingly
   useEffect(() => {
     if (!(genre in mapGenre.current)) {
       setSearchParams({'genre':'all'})
@@ -35,7 +38,7 @@ const Books = () => {
   return (
     <div className="center">
       <h1>{mapGenre.current[genre]}</h1>
-      <div className="full-center">
+      <div className="bookshelf">
       {
         books.map((book) => (
           <BookCard key={book.id} book={book}/>

@@ -21,7 +21,7 @@ const Book = ({onAddToCart}) => {
 
       // fetch related books
       const allBooksFromServer = await fetchBooks("all");
-      setRelatedBooks(await getRelatedBooks(bookFromServer, allBooksFromServer, 5));
+      setRelatedBooks(await getRelatedBooks(bookFromServer, allBooksFromServer, 7));
     }
     getBook()
   }, [bookId, navigate])
@@ -46,7 +46,7 @@ const Book = ({onAddToCart}) => {
       <h1>{book.title}</h1>
 
       {/* Book details */}
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
         {/* Book cover and price */}
         <div className="col-md-auto">
@@ -58,8 +58,8 @@ const Book = ({onAddToCart}) => {
             </div>
           </div>
           {/* Book details */}
-          <div className="col-md-auto">
-            <div className="book-info" style={{width: "18rem"}}>
+          <div className="col-lg">
+            <div className="book-info" style={{textAlign: "justify"}}>
               <h2>{book.author}</h2>
               <h3>{book.category}</h3>
               <p>{book.description}</p>

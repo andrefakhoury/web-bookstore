@@ -1,45 +1,50 @@
-import { clampString } from '../utils';
+import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa'
 
 const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart, showQuantityButtons }) => {
   const images = require.context('../../public/images', true);
 
-  return (
-    <table>
-          <thead>
-            <tr>
-              <th>ITEM</th>
-              <th>QUANTITY</th>
-              <th>SUB TOTAL</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Each book is a row */}
+  return <div className="container">
+    <div className="row font-weight-bold">
+      <div className="col-sm-1"></div> {/* Cover photo */}
+      <div className="col">ITEM</div>
+      <div className="col-sm-2">QUANTITY</div>
+      <div className="col-sm-3">SUB TOTAL</div>
+    </div>
+    {
+      books.map((book, index) => (
+        cartArray[index] && <div key={book.id} className="row border border-light align-items-center">
+          {/* Item cover && title */}
+          <div className="col-sm-1">
+            <img alt="Book Cover" src={images(`./${book.img}`)} width="100%"/>
+          </div>
+
+          <div className="col">
+            <span className='cart-item'>{book.title} - {book.author}</span>
+          </div>
+
+          {/* Quantity */}
+          <div className="col-sm-2">
+            {cartArray[index][1]}
             {
-              books.map((book, index) => (
-                cartArray[index] && <tr key={book.id}>
-                  <td>
-                    <div className='book-container'>
-                      <img alt="Book Cover" src={images(`./${book.img}`)} width="70px"/>
-                    </div>
-                    <p className='cart-item'>{clampString(book.title, 15)} - {clampString(book.author, 15)}</p>
-                  </td>
-                  <td>
-                    {cartArray[index][1]}{'\t'}
-                    {
-                      showQuantityButtons === true && <>
-                        <button className='qtd-control plus' onClick={() => addToCart(book.id, 1)}>+</button>
-                        <button className='qtd-control minus' onClick={() => removeFromCart(book.id, 1)}>-</button>
-                      </>
-                    }
-                  </td>
-                  <td>$ {(cartArray[index][1] * book.price).toFixed(2)}</td>
-                </tr>
-                
-              ))
+              showQuantityButtons === true &&
+              <div>
+                {
+                  cartArray[index][1] !== 1 ?
+                    <FaMinus style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book.id, 1)}/>
+                  : <FaTrash style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book.id, 1)}/>
+                }
+                <FaPlus style={{cursor: "pointer"}} size={12} onClick={() => addToCart(book.id, 1)}/>
+              </div>
             }
-          </tbody>
-        </table>
-  )
+          </div>
+
+          {/* Price */}
+          <div className="col-sm-3">${(cartArray[index][1] * book.price).toFixed(2)}</div>
+        </div>
+      ))
+
+    }
+  </div>
 }
 
 export default CartItems

@@ -42,12 +42,14 @@ const Login = ({ logUser }) => {
   return (
     <div className="center">
       <h1>Login</h1>
+      <div className="container text-center">
         <form onSubmit={onSubmit}>
             <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
             <FormField label="Password" type="password" isRequired={true} setText={setPassword}/>
             <input type="submit" value="Login"/>
             <p>Don't have an account? <Link to="/signup">Sign Up</Link> now!</p>
         </form>
+      </div>
     </div>
   )
 }
