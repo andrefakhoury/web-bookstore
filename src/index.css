@@ -65,14 +65,20 @@ nav a:hover, .footer a:hover{
 }
 
 .bookshelf {
-  text-align: center;
+  /* text-align: center; */
+  max-width: 1400px;
+  align-items: center;
+  margin: 0 auto;
 }
 
 div.gallery {
   margin: 5px;
   border: 1px solid #ccc;
   display: inline-table;
-  width: 180px;
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+  overflow: hidden;
 }
 
 div.gallery:hover {
