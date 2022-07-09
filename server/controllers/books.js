@@ -2,7 +2,7 @@ const { Book } = require('../models/books');
 
 // GET data
 exports.get = (req, res) => {
-  Book.find(req.query).then(result => {
+  Book.find(req.query).sort({ _id: -1 }).then(result => {
     res.status(200).send(result);
   }).catch(err => {
     res.status(400).send(err);

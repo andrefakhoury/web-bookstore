@@ -98,13 +98,26 @@ function App() {
       setLoggedUser(data);
   }
 
+  const updateProfileAdmin = async (id) => {
+    const oldUser = await fetchUser(id);
+    const updatedUser = {
+      ...oldUser,
+      admin: !oldUser.admin
+    };
+    await fetch(`http://localhost:8080/accounts/${id}`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(updatedUser)
+    });
+  }
+
   const createBook = async (newBook) => {
     const res = await fetch(`http://localhost:8080/books/`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(newBook)
     });
-    const data = await res.json();
+    await res.json();
   }
 
   const updateBook = async (id, newBook) => {
@@ -118,12 +131,11 @@ function App() {
       price: newBook.price,
       img: newBook.img
     };
-    const res = await fetch(`http://localhost:8080/books/${id}`, {
+    await fetch(`http://localhost:8080/books/${id}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(updatedBook)
     });
-    const data = await res.json();
   }
 
   // Add to cart (if in stock) and saves to local storage
@@ -262,7 +274,7 @@ function App() {
             }
             {
               loggedUser.admin === true &&
-                <Route path='/admin' element={<AdminPage loggedUser={loggedUser}/>}/>
+                <Route path='/admin' element={<AdminPage loggedUser={loggedUser} onUpdateAdmin={updateProfileAdmin}/>}/>
             }            
           </Routes>
         </div>

@@ -123,3 +123,12 @@ export async function fetchUserbyEmail(email){
   const data = await res.json();
   return data;
 }
+
+export const mapGenre = {
+  "biography": "Biography",
+  "classics": "Classics",
+  "comics": "Comics & Mangas",
+  "fantasy": "Fantasy & Sci-Fi",
+  "humor": "Humor",
+  "romance": "Romance"
+};

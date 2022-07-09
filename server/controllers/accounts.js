@@ -2,7 +2,7 @@ const { Account } = require('../models/accounts');
 
 // GET data
 exports.get = (req, res) => {
-  Account.find(req.query).then(result => {
+  Account.find(req.query).sort({ _id: -1 }).then(result => {
     res.status(200).send(result);
   }).catch(err => {
     res.status(400).send(err);

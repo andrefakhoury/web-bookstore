@@ -67,12 +67,27 @@ First of all, clone this repository locally in your machine, unzip it somewhere 
 - Start local client site instance: `npm start`;
 - After that, the local site will be up and running on some port (probably `localhost:3000/`).
 
+```
+Compiled successfully!
+
+You can now view bookstore in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.0.9:3000
+```
+
 ### Server side
 
 - Enter the server folder (`web-bookstore/server`);
 - Install all dependencies: `npm install`;
 - Start back-end server: `npm start`;
-- After that, the server will be up and running on `localhost:5050/`.
+- After that, the server will be up and running on `localhost:8080/`;
+- Make sure the database also connects (you may need to contact us to allowlist your IP if 'Allow access from everywhere' configuration is timed out in cloud mondodb settings).
+
+```
+Server Running on port: http://localhost:8080
+Database is connected
+```
 
 ## 7. Problems
 
