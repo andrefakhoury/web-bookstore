@@ -52,7 +52,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         img: coverImage.replace(/^.*\\/, "")
       };
 
-      onUpdate(book.id, updatedBook);
+      onUpdate(book._id, updatedBook);
       await Swal.fire({
         title: 'Successfully updated!',
         html: `<b>${title}</b> information was successfully updated!`,

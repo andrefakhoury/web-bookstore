@@ -87,7 +87,7 @@ const Book = ({onAddToCart}) => {
         <h3>Related books</h3>
         {
           relatedBooks.map((relatedBook) => (
-            <BookCard key={relatedBook.id} book={relatedBook}/>
+            <BookCard key={relatedBook._id} book={relatedBook}/>
           ))
         }
       </div>

@@ -38,7 +38,7 @@ const AdminPage = ({loggedUser}) => {
             <thead>
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Username</th>
+                <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Admin</th>
               </tr>
@@ -46,9 +46,9 @@ const AdminPage = ({loggedUser}) => {
             <tbody>
               {
                 content.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td><Link to={{pathname: "/users/update", search:`id=${user.id}`}}>{user.userName}</Link></td>
+                  <tr key={user._id}>
+                    <td>{user._id}</td>
+                    <td><Link to={{pathname: "/users/update", search:`id=${user._id}`}}>{user.name}</Link></td>
                     <td>{user.email}</td>
                     <td>{user.admin ? 'True' : 'False'}</td>
                   </tr>
@@ -84,9 +84,9 @@ const AdminPage = ({loggedUser}) => {
                   </tr>
               {
                 content.map((book) => (
-                  <tr key={book.id}>
-                    <th scope="row">{book.id}</th>
-                    <td><Link to={{pathname: "/books/update", search:`id=${book.id}`}}>{book.title}</Link></td>
+                  <tr key={book._id}>
+                    <th scope="row">{book._id}</th>
+                    <td><Link to={{pathname: "/books/update", search:`id=${book._id}`}}>{book.title}</Link></td>
                     <td>{book.author}</td>
                     <td>{book.category}</td>
                     <td>{book.price}</td>

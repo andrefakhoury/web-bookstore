@@ -12,7 +12,7 @@ const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart, show
     </div>
     {
       books.map((book, index) => (
-        cartArray[index] && <div key={book.id} className="row border border-light align-items-center">
+        cartArray[index] && <div key={book._id} className="row border border-light align-items-center">
           {/* Item cover && title */}
           <div className="col-sm-1">
             <img alt="Book Cover" src={images(`./${book.img}`)} width="100%"/>
@@ -30,10 +30,10 @@ const CartItems = ({ books, cartArray, setBooks, addToCart, removeFromCart, show
               <div>
                 {
                   cartArray[index][1] !== 1 ?
-                    <FaMinus style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book.id, 1)}/>
-                  : <FaTrash style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book.id, 1)}/>
+                    <FaMinus style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book._id, 1)}/>
+                  : <FaTrash style={{cursor: "pointer"}} size={12} onClick={() => removeFromCart(book._id, 1)}/>
                 }
-                <FaPlus style={{cursor: "pointer"}} size={12} onClick={() => addToCart(book.id, 1)}/>
+                <FaPlus style={{cursor: "pointer"}} size={12} onClick={() => addToCart(book._id, 1)}/>
               </div>
             }
           </div>

@@ -58,15 +58,21 @@ The site behavior seems to be flawless, with everything working correctly and wi
 
 It's necessary to have `npm` previously installed.
 
-First of all, clone this repository locally in your machine, and unzip it somewhere;
+First of all, clone this repository locally in your machine, unzip it somewhere and follow the instructions for each side;
 
-Then install all dependencies: `npm install`;
+### Client side
 
-Start localhost instance: `npm start`;
+- Enter the project folder (`web-bookstore`);
+- Install all dependencies: `npm install`;
+- Start local client site instance: `npm start`;
+- After that, the local site will be up and running on some port (probably `localhost:3000/`).
 
-Start the mock json database: `npm run server`;
+### Server side
 
-After that, the server will be up and running on `localhost:3000/`, and the mock database will be available at `localhost:5000`.
+- Enter the server folder (`web-bookstore/server`);
+- Install all dependencies: `npm install`;
+- Start back-end server: `npm start`;
+- After that, the server will be up and running on `localhost:5050/`.
 
 ## 7. Problems
 
@@ -79,3 +85,4 @@ Some of frameworks, libraries and technologies used were:
 - Bootstrap (CSS)
 - React (front-end)
 - JSON-server (DB mockup)
+- MongoDB (NoSQL DB)

@@ -8,7 +8,7 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
   let navigate = useNavigate();
   
   // States for each field
-  const [userName, setUserName] = useState(user.userName);
+  const [name, setName] = useState(user.name);
   const [address, setAddress] = useState(user.address);
   const [email, setEmail] = useState(user.email);
   const [phoneNumber, setPhoneNumber] = useState(user.phone);
@@ -18,14 +18,14 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
 
   // Check if user is invalid
   useEffect(() => {
-    if (!user.id)
+    if (!user._id)
       navigate({pathname: "/login"}, {replace: true});
   }, [user, navigate])
 
   const onClickLogout = async (e) => {
     await Swal.fire({
       title: 'Successfully logged out!',
-      html: `See you soon, <b>${user.userName}!</b>`,
+      html: `See you soon, <b>${user.name}!</b>`,
       timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
@@ -56,17 +56,17 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
       }
 
       const updatedUser = {
-        userName: userName,
+        name: name,
         address: address,
         password: password,
         phone: phoneNumber
       };
 
-      onUpdate(user.id, updatedUser);
+      onUpdate(user._id, updatedUser);
 
       await Swal.fire({
         title: 'Successfully updated!',
-        html: `<b>${userName}</b> information was successfully updated!`,
+        html: `<b>${name}</b> information was successfully updated!`,
         timer: 2000,
         timerProgressBar: true,
         didOpen: () => {
@@ -88,11 +88,11 @@ const UserProfile = ({user, onUpdate, onLogOut}) => {
     <div className="center">
       <h1>User profile</h1>
       <form onSubmit={onSubmit}>
-        <FormField label="Name" value={userName} isRequired={true} setText={setUserName}/>
+        <FormField label="Name" value={name} isRequired={true} setText={setName}/>
         <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
         <FormField label="Email" value={email} isDisabled={true} isRequired={true} setText={setEmail}/>
         <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>
-        <FormField label="Old password" type="password" isRequired={true} setText={setOldPassword}/>
+        <FormField label="Current password" type="password" isRequired={true} setText={setOldPassword}/>
         <FormField label="New password" type="password" setText={setNewPassword}/>
         <FormField label="Confirm new password" type="password" setText={setConfirmNewPassword}/>
         <input type="submit" value="Update information"/>

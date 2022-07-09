@@ -6,7 +6,7 @@ const BookCard = ({book}) => {
   
   return (
     <div className="gallery">
-      <Link to={{pathname: "/book", search: `${book.id}`}}>
+      <Link to={{pathname: "/book", search: `${book._id}`}}>
         <img alt="Book Cover" src={images(`./${book.img}`)}/>
         <div className="desc">
           {clampString(book.title, 14)}<br/>

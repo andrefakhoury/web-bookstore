@@ -46,7 +46,7 @@ function App() {
     }
     const data = window.localStorage.getItem("LOGGED_USER_INFO");
     let dataInfo = JSON.parse(data) ?? new Map();
-    if (!isNaN(dataInfo.id)) {
+    if (dataInfo.id) {
       getUser(dataInfo.id);
     }
   }, []);
@@ -62,17 +62,20 @@ function App() {
   // Log an user, saving local state and storage
   const logUser = ((user) => {
     setLoggedUser(user);
-    const userId = { id: user.id };
+    const userId = { id: user._id };
     window.localStorage.setItem("LOGGED_USER_INFO", JSON.stringify(userId));
   });
 
   const createProfile = async (newUser) => {
-    const res = await fetch(`http://localhost:5000/users/`, {
+    console.log("oie");
+    console.log("Creating", newUser);
+    const res = await fetch(`http://localhost:8080/accounts/`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(newUser)
     });
     const data = await res.json();
+    console.log(data);
     logUser(data);
   }
 
@@ -80,12 +83,12 @@ function App() {
     const oldUser = await fetchUser(id);
     const updatedUser = {
       ...oldUser,
-      userName: newUser.userName,
+      name: newUser.name,
       address: newUser.address,
       password: newUser.password,
       phone: newUser.phone      
     };
-    const res = await fetch(`http://localhost:5000/users/${id}`, {
+    const res = await fetch(`http://localhost:8080/accounts/${id}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(updatedUser)
@@ -96,7 +99,7 @@ function App() {
   }
 
   const createBook = async (newBook) => {
-    const res = await fetch(`http://localhost:5000/books/`, {
+    const res = await fetch(`http://localhost:8080/books/`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(newBook)
@@ -115,7 +118,7 @@ function App() {
       price: newBook.price,
       img: newBook.img
     };
-    const res = await fetch(`http://localhost:5000/books/${id}`, {
+    const res = await fetch(`http://localhost:8080/books/${id}`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(updatedBook)
@@ -130,6 +133,7 @@ function App() {
     const newAmmount = oldAmmount + qtt;
     
     // check if is available
+    console.log(bookId);
     const book = await fetchBook(bookId);
     if (!book.qttStock || newAmmount > book.qttStock) {
       await Swal.fire({
@@ -188,7 +192,7 @@ function App() {
       newBook.qttSold += currentQtt;
       newBook.qttStock -= currentQtt;
       
-      await fetch(`http://localhost:5000/books/${currentId}`, {
+      await fetch(`http://localhost:8080/books/${currentId}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newBook)
@@ -223,21 +227,21 @@ function App() {
             {/* If logged in, goes to desired page. Otherwise, goes to login */}
             {
               <Route path='/user' element={
-                loggedUser.id ?
+                loggedUser._id ?
                   <UserProfile user={loggedUser} onUpdate={updateProfile} onLogOut={onLogOut}/>
                 : <Login logUser={logUser}/>
               }/>
             }
             {
               <Route path='/checkout' element={
-                loggedUser.id ?
+                loggedUser._id ?
                   <Checkout cartItems={cartItems} cartObjects={cartObjects} onSubmitCheckout={onSubmitCheckout}/>
                 : <Login logUser={logUser}/>
               }/>
             }
             {
               <Route path='/login' element={
-                loggedUser.id ?
+                loggedUser._id ?
                   <UserProfile user={loggedUser} onUpdate={updateProfile} onLogOut={onLogOut}/>
                 : <Login logUser={logUser}/>
               }/>

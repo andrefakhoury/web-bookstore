@@ -54,7 +54,7 @@ export async function getRelatedBooks(book, arr, size) {
   for (let curIndex in arr) {
     const curBook = arr[curIndex];
     // ignores given book
-    if (curBook.id === book.id) {
+    if (curBook._id === book._id) {
       continue;
     }
     let categories = Object.entries(curBook);
@@ -77,7 +77,8 @@ export async function getRelatedBooks(book, arr, size) {
 
 // Fetch from database
 export async function fetchBook(id){
-  const res = await fetch(`http://localhost:5000/books/${id}`);
+  const res = await fetch(`http://localhost:8080/books/${id}`);
+  console.log(await res);
   const data = await res.json();
   return data;
 }
@@ -85,7 +86,7 @@ export async function fetchBook(id){
 export async function fetchBooksByIds(ids) {
   let data = [];
   for (var i = 0; i < ids.length; i++) {
-    const res = await fetch(`http://localhost:5000/books/${ids[i]}`);
+    const res = await fetch(`http://localhost:8080/books/${ids[i]}`);
     const book = await res.json();
     data.push(book);
   }
@@ -98,28 +99,27 @@ export async function fetchBooks(genre) {
   if (genre === "" || genre === "all")
     booksToFetch = "";
 
-  const res = await fetch(`http://localhost:5000/books${booksToFetch}`);
+  const res = await fetch(`http://localhost:8080/books${booksToFetch}`);
   const data = await res.json();
   return data;
 }
 
 // Fetch from database
 export async function fetchUser(id){
-  const res = await fetch(`http://localhost:5000/users/${id}`);
+  const res = await fetch(`http://localhost:8080/accounts/${id}`);
   const data = await res.json();
   return data;
 }
 
 // Fetch from database
 export async function fetchUsers(){
-  const res = await fetch(`http://localhost:5000/users`);
+  const res = await fetch(`http://localhost:8080/accounts`);
   const data = await res.json();
   return data;
 }
 
 export async function fetchUserbyEmail(email){
-  // TODO treat error
-  const res = await fetch(`http://localhost:5000/users/?email=${email}`);
+  const res = await fetch(`http://localhost:8080/accounts/?email=${email}`);
   const data = await res.json();
   return data;
 }

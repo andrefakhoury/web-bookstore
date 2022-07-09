@@ -12,7 +12,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
   
   // States for each field
   const [user, setUser] = useState({})
-  const [userName, setUserName] = useState();
+  const [name, setName] = useState();
   const [address, setAddress] = useState();
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
@@ -25,7 +25,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
     const getUser = async () => {
       const user = await fetchUser(userId);
       setUser(user);
-      setUserName(user.userName);
+      setName(user.name);
       setAddress(user.address);
       setEmail(user.email);
       setPhoneNumber(user.phone);
@@ -40,17 +40,17 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
     // Verifies fields and update
     try {
       const updatedUser = {
-        userName: userName,
+        name: name,
         address: address,
         password: user.password,
         phone: phoneNumber
       };
 
-      onUpdate(user.id, updatedUser, false);
+      onUpdate(user._id, updatedUser, false);
       
       await Swal.fire({
         title: 'Successfully updated!',
-        html: `<b>${userName}</b> information was successfully updated!`,
+        html: `<b>${name}</b> information was successfully updated!`,
         timer: 2000,
         timerProgressBar: true,
         didOpen: () => {
@@ -73,7 +73,7 @@ const UpdateUserProfile = ({loggedUser, onUpdate}) => {
     <div className="center">
       <h1>Update user profile</h1>
       <form onSubmit={onSubmit}>
-        <FormField label="Name" value={userName} isRequired={true} setText={setUserName}/>
+        <FormField label="Name" value={name} isRequired={true} setText={setName}/>
         <FormField label="Address" value={address} isRequired={true} setText={setAddress}/>
         <FormField label="Email" value={email} isRequired={true} setText={setEmail}/>
         <FormField label="Phone number" value={phoneNumber} isRequired={true} setText={setPhoneNumber}/>

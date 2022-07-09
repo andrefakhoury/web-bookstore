@@ -33,7 +33,7 @@ const Login = ({ logUser }) => {
 
         await Swal.fire({
           title: 'Successfully logged in!',
-          html: `Hello, <b>${user[0].userName}!</b>`,
+          html: `Hello, <b>${user[0].name}!</b>`,
           timer: 2000,
           timerProgressBar: true,
           didOpen: () => {
