@@ -1,7 +1,7 @@
 import BookCard from "./BookCard"
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { fetchBooks } from "../utils"
+import { fetchBooks, mapAllCategories } from "../utils"
 
 const Books = () => {
   let navigate = useNavigate();
@@ -13,13 +13,8 @@ const Books = () => {
   const mapGenre = useRef({
     "": "Trending now",
     "all": "Trending now",
-    "biography": "Biography",
-    "classics": "Classics",
-    "comics": "Comics & Mangas",
-    "fantasy": "Fantasy & Sci-Fi",
-    "humor": "Humor",
-    "romance": "Romance"
-  })
+    ...mapAllCategories
+  });
 
   // Get current genre and load books accordingly
   useEffect(() => {

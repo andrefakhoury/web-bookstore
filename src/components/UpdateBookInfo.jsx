@@ -17,6 +17,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
   const [coverImage, setCoverImage] = useState("book_cover.png");
 
   // Check if user is invalid
@@ -32,6 +33,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
       setDescription(book.description);
       setCategory(book.category);
       setPrice(book.price);
+      setStock(book.qttStock);
       setCoverImage(book.img);
     } 
     getBook();
@@ -49,6 +51,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         description: description,
         category: category,
         price: price,
+        qttStock: stock,
         img: coverImage.replace(/^.*\\/, "")
       };
 
@@ -82,6 +85,7 @@ const UpdateBookInfo = ({loggedUser, onUpdate}) => {
         <FormField label="Category" value={category} isRequired={true} setText={setCategory}/>
         <FormField label="Description" value={description} isRequired={true} setText={setDescription}/>
         <FormField label="Price" value={price} isRequired={true} setText={setPrice}/>
+        <FormField label="Stock" type="number" value={stock} isRequired={true} setText={setStock}/>
         <FormField type="file" setText={setCoverImage} />
         <input type="submit" value="Update information"/>
       </form>

@@ -129,6 +129,7 @@ function App() {
       description: newBook.description,
       category: newBook.category,
       price: newBook.price,
+      qttStock: newBook.qttStock,
       img: newBook.img
     };
     await fetch(`http://localhost:8080/books/${id}`, {

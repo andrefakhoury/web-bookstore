@@ -124,7 +124,7 @@ export async function fetchUserbyEmail(email){
   return data;
 }
 
-export const mapGenre = {
+export const mapAllCategories = {
   "biography": "Biography",
   "classics": "Classics",
   "comics": "Comics & Mangas",
